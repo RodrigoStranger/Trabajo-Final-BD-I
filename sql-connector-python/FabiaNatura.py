@@ -1,19 +1,18 @@
-import mysql.connector
+from FabiaNatura_users import gestionar_insercion_asesor
+from FabiaNatura_users import gestionar_insercion_vendedor
+from FabiaNatura_users import gestionar_insercion_cliente
+from FabiaNatura_contracts import gestionar_insercion_contrato
+from FabiaNatura_contracts import gestionar_eliminacion_contrato
 
 
 
-config = { 'user': 'rodrigo', 'password': 'ubnt', 'host': 'localhost', 'database': 'FabiaNatura', 'port': 3306 } 
+gestionar_insercion_contrato(
+    dni='73714089',  # DNI del empleado
+    fecha_inicio='2024-01-01',
+    fecha_fin='2024-12-31',
+    salario_men=3000.00,
+    observaciones='Contrato a tiempo completo.'
+)
 
-conexion = mysql.connector.connect(**config)
 
-#cursor = conexion.cursor()
-
-#crear_bd = '''
-
-#'''
-
-#cursor.execute(crear_bd)
-
-#conexion.commit()
-#cursor.close()
-conexion.close()
+#gestionar_eliminacion_contrato(dni="73714089")
