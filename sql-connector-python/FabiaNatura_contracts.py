@@ -102,33 +102,91 @@ def gestionar_actualizacion_contrato(dni, fecha_inicio, fecha_fin, salario_men, 
             cursor.close()
             conexion.close()
 
-# DELETE CONTRATO
-def eliminar_contrato_por_dni(cursor, dni):
-    # Utilizamos la función obtener_codigo_contrato_por_dni para buscar el contrato
-    cod_contrato = obtener_codigo_contrato_por_dni(cursor, dni)
-    
-    if cod_contrato:
-        confirmacion = input(f"¿Estás seguro de que deseas eliminar el contrato con código {cod_contrato}? Esto eliminará al empleado y la persona asociada. (si/no): ").lower()
-        if confirmacion == 'si':
-            query_delete_contrato = "DELETE FROM Contratos WHERE cod_contrato = %s"
-            cursor.execute(query_delete_contrato, (cod_contrato,))
-            print(f"Contrato con código {cod_contrato} ha sido eliminado.")
-        else:
-            print("Eliminación cancelada.")
-    else:
-        print(f"No se encontró ningún contrato asociado al empleado con DNI {dni}.")
-
-# Función principal para gestionar la eliminación del contrato
-def gestionar_eliminacion_contrato(dni):
+# READ
+def obtener_contratos_y_empleados():
     try:
         conexion = conectar_base_datos("LocalHost", "FabiaNatura", "rodrigo", "ubnt")
         if conexion and conexion.is_connected():
             cursor = conexion.cursor()
-            # Eliminar el contrato usando el DNI
-            eliminar_contrato_por_dni(cursor, dni)
-            conexion.commit()
-    except Error as e:
-        print(f"Error al eliminar el contrato: {e}")
+            # Consulta para obtener contratos, empleados y nombres
+            query = """
+            SELECT 
+                Contratos.cod_contrato,
+                Contratos.fecha_inicio,
+                Contratos.fecha_fin,
+                Contratos.salario_men,
+                Contratos.observaciones,
+                Empleados.cod_empleado,
+                Empleados.dni,
+                Personas.nombre AS nombre_empleado
+            FROM 
+                Contratos
+            JOIN 
+                Empleados ON Contratos.cod_empleado = Empleados.cod_empleado
+            JOIN 
+                Personas ON Empleados.dni = Personas.dni;
+            """
+            cursor.execute(query)
+            resultados = cursor.fetchall()
+            for contrato in resultados:
+                print(f"Nombre de Empleado: {contrato[7]}")
+                print(f"Dni de Empleado: {contrato[6]}")
+                print(f"Código de Empleado: {contrato[5]}")
+                print(f"Código de Contrato: {contrato[0]}")
+                print(f"Fecha Inicio: {contrato[1]}")
+                print(f"Fecha Fin: {contrato[2]}")
+                print(f"Salario Mensual: {contrato[3]}")
+                print(f"Observaciones: {contrato[4]}")
+                print("-" * 30)
+    except Error as e: print(f"Error al realizar la consulta: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def obtener_detalles_contrato_por_dni(dni):
+    try:
+        conexion = conectar_base_datos("LocalHost", "FabiaNatura", "rodrigo", "ubnt")
+        if conexion and conexion.is_connected():
+            cursor = conexion.cursor()
+            # Obtener el código de contrato usando el DNI
+            cod_contrato = obtener_codigo_contrato_por_dni(cursor, dni)
+            if not cod_contrato:
+                return  # Si no se encuentra el contrato, la función termina
+            # Consulta para obtener detalles del contrato y el empleado
+            query = """
+            SELECT 
+                Contratos.cod_contrato,
+                Contratos.fecha_inicio,
+                Contratos.fecha_fin,
+                Contratos.salario_men,
+                Contratos.observaciones,
+                Empleados.cod_empleado,
+                Empleados.dni,
+                Personas.nombre AS nombre_empleado
+            FROM 
+                Contratos
+            JOIN 
+                Empleados ON Contratos.cod_empleado = Empleados.cod_empleado
+            JOIN 
+                Personas ON Empleados.dni = Personas.dni
+            WHERE 
+                Contratos.cod_contrato = %s;
+            """
+            cursor.execute(query, (cod_contrato,))
+            resultado = cursor.fetchone()
+            # Mostrar los detalles del contrato si se encontró
+            if resultado:
+                print(f"Código de Contrato: {resultado[0]}")
+                print(f"Fecha Inicio: {resultado[1]}")
+                print(f"Fecha Fin: {resultado[2]}")
+                print(f"Salario Mensual: {resultado[3]}")
+                print(f"Observaciones: {resultado[4]}")
+                print(f"Código de Empleado: {resultado[5]}")
+                print(f"DNI de Empleado: {resultado[6]}")
+                print(f"Nombre de Empleado: {resultado[7]}")
+            else: print("No se encontró ningún detalle para el contrato especificado.")
+    except Error as e: print(f"Error al realizar la consulta: {e}")
     finally:
         if conexion.is_connected():
             cursor.close()

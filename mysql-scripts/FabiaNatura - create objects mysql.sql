@@ -117,7 +117,7 @@ CREATE TABLE Categorias (
 CREATE TABLE Productos (
     cod_producto VARCHAR(10) PRIMARY KEY,
     cod_categoria VARCHAR(10) NOT NULL,
-    ruc VARCHAR(15) NOT NULL,
+    ruc VARCHAR(15),
     nombre VARCHAR(100) UNIQUE NOT NULL,
     linea VARCHAR(100),
     descripcion TEXT,
@@ -126,7 +126,7 @@ CREATE TABLE Productos (
     stock INT NOT NULL,
     fecha_registro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (cod_categoria) REFERENCES Categorias(cod_categoria) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (ruc) REFERENCES Proveedores(ruc) ON UPDATE CASCADE ON DELETE NO ACTION
+    FOREIGN KEY (ruc) REFERENCES Proveedores(ruc) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 -- Facturas
