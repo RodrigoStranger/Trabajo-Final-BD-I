@@ -1,5 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
+import os
 
 def obtener_siguiente_codigo(cursor, tabla, columna, prefijo):
     query = f"SELECT {columna} FROM {tabla} ORDER BY {columna} DESC LIMIT 1"
@@ -21,3 +22,20 @@ def conectar_base_datos(host, database, user, password):
     except Error as e:
         print(f"Error al conectar a la base de datos: {e}")
         return None
+
+def cargar_tablas():
+    conexion = conectar_base_datos("LocalHost", "FabiaNatura", "rodrigo", "ubnt")
+    cursor = conexion.cursor()
+    directory = os.path.dirname(__file__)
+    sketchfile = 'FabiaNatura - create objects mysql.sql'
+    pathfile = os.path.join(directory, '..', 'mysql-scripts', sketchfile)
+    with open(pathfile, 'r') as archivo: comandos_sql = archivo.read()
+    for comando in comandos_sql.split(';'):
+        if comando.strip():
+            try:
+                cursor.execute(comando)
+                #print("Ejecutado:", comando)
+            except Exception as err: print(f"Error en el comando: {comando}\n{err}")
+    conexion.commit()
+    cursor.close()
+    print("Tablas cargadas exitosamente.")
