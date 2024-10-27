@@ -63,7 +63,7 @@ CREATE TABLE Vendedores (
 CREATE TABLE Asesores (
     cod_asesor VARCHAR(10) PRIMARY KEY,
     cod_empleado VARCHAR(10) NOT NULL,
-    años_experiencia INT NOT NULL,
+    anios_experiencia INT NOT NULL,
     especialidad VARCHAR(20) NOT NULL,
     FOREIGN KEY (cod_empleado) REFERENCES Empleados(cod_empleado) ON DELETE CASCADE ON UPDATE CASCADE
 );

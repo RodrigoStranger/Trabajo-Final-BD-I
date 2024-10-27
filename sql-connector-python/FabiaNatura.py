@@ -6,6 +6,7 @@ from FabiaNatura_contracts import obtener_detalles_contrato_por_dni
 from FabiaNatura_contracts import obtener_contratos_y_empleados
 from FabiaNatura_functions import cargar_tablas
 
+'''
 gestionar_insercion_vendedor(
     dni='73714089',
     nombre='Rodrigo',
@@ -21,8 +22,10 @@ gestionar_insercion_contrato(
     salario_men=3000.00,
     observaciones='Contrato a tiempo completo.'
 )
-
+'''
+#gestionar_insercion_asesor("40487607", 5, "Cosmetóloga")
+#gestionar_insercion_vendedor("73714089", "Vendedor Senior")
 #obtener_detalles_contrato_por_dni('73714089')
 #obtener_contratos_y_empleados()
-
+gestionar_insercion_cliente("40487607", "Cliente Preferencial")
 #cargar_tablas()
