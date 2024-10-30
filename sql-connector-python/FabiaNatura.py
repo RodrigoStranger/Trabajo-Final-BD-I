@@ -1,31 +1,23 @@
-from FabiaNatura_users import gestionar_insercion_asesor
-from FabiaNatura_users import gestionar_insercion_vendedor
-from FabiaNatura_users import gestionar_insercion_cliente
-from FabiaNatura_contracts import gestionar_insercion_contrato
-from FabiaNatura_contracts import obtener_detalles_contrato_por_dni
-from FabiaNatura_contracts import obtener_contratos_y_empleados
-from FabiaNatura_functions import cargar_tablas
+from FabiaNatura_users import *
+from FabiaNatura_contracts import *
+from FabiaNatura_functions import *
 
 '''
-gestionar_insercion_vendedor(
-    dni='73714089',
-    nombre='Rodrigo',
-    apellido_paterno='Infanzon',
-    apellido_materno='Acosta',
-    fecha_nacimiento='2004-04-16',
-    rol='Gerente de Ventas'
-)
 gestionar_insercion_contrato(
-    dni='73714089',  # DNI del empleado
+    dni='40487607',
     fecha_inicio='2024-01-01',
     fecha_fin='2024-12-31',
     salario_men=3000.00,
-    observaciones='Contrato a tiempo completo.'
+    observaciones='Contrato a tiempo completo.',
+    estado = 'activo'
 )
 '''
+#gestionar_cambio_estado_empleado_y_contrato("40487607", "inactivo")
 #gestionar_insercion_asesor("40487607", 5, "Cosmetóloga")
 #gestionar_insercion_vendedor("73714089", "Vendedor Senior")
 #obtener_detalles_contrato_por_dni('73714089')
 #obtener_contratos_y_empleados()
-gestionar_insercion_cliente("40487607", "Cliente Preferencial")
+#gestionar_insercion_cliente("73714089", "Cliente Preferencial")
 #cargar_tablas()
+
+imprimir_todos_los_clientes()

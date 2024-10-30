@@ -37,6 +37,7 @@ CREATE TABLE Direcciones_Persona (
 CREATE TABLE Empleados (
     cod_empleado VARCHAR(10) PRIMARY KEY,
     dni VARCHAR(8) NOT NULL,
+    estado ENUM('activo', 'inactivo') NOT NULL,
     FOREIGN KEY (dni) REFERENCES Personas(dni) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -48,6 +49,7 @@ CREATE TABLE Contratos (
     fecha_fin DATE,
     salario_men FLOAT NOT NULL,
     observaciones TEXT,
+    estado ENUM('activo', 'inactivo') NOT NULL,
     FOREIGN KEY (cod_empleado) REFERENCES Empleados(cod_empleado) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -124,6 +126,7 @@ CREATE TABLE Productos (
     precio_compra FLOAT NOT NULL,
     precio_venta FLOAT NOT NULL,
     stock INT NOT NULL,
+    estado ENUM('disponible', 'agotado') NOT NULL,
     fecha_registro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (cod_categoria) REFERENCES Categorias(cod_categoria) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (ruc) REFERENCES Proveedores(ruc) ON UPDATE CASCADE ON DELETE SET NULL

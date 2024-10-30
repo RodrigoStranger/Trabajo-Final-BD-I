@@ -45,19 +45,19 @@ def verificar_contrato_existente(cursor, cod_empleado):
     return False  # No tiene contrato
 
 # CREATE CONTRATO
-def insertar_contrato(cursor, cod_empleado, fecha_inicio, fecha_fin, salario_men, observaciones):
+def insertar_contrato(cursor, cod_empleado, fecha_inicio, fecha_fin, salario_men, observaciones, estado = "activo"):
     # Verificamos si el empleado ya tiene un contrato
     if verificar_contrato_existente(cursor, cod_empleado): return  # Si ya tiene contrato, no se inserta otro
     # Usamos la función genérica para obtener el siguiente código de contrato
     cod_contrato = obtener_siguiente_codigo(cursor, "Contratos", "cod_contrato", "CONT")
     # Insertar el contrato
-    query_contrato = """INSERT INTO Contratos (cod_contrato, cod_empleado, fecha_inicio, fecha_fin, salario_men, observaciones) 
-                        VALUES (%s, %s, %s, %s, %s, %s)"""
-    valores_contrato = (cod_contrato, cod_empleado, fecha_inicio, fecha_fin, salario_men, observaciones)
+    query_contrato = """INSERT INTO Contratos (cod_contrato, cod_empleado, fecha_inicio, fecha_fin, salario_men, observaciones, estado) 
+                        VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+    valores_contrato = (cod_contrato, cod_empleado, fecha_inicio, fecha_fin, salario_men, observaciones, estado)
     cursor.execute(query_contrato, valores_contrato)
     print(f"Contrato insertado correctamente para el empleado con código {cod_empleado}.")
 
-def gestionar_insercion_contrato(dni, fecha_inicio, fecha_fin, salario_men, observaciones):
+def gestionar_insercion_contrato(dni, fecha_inicio, fecha_fin, salario_men, observaciones, estado):
     try:
         conexion = conectar_base_datos("LocalHost", "FabiaNatura", "rodrigo", "ubnt")
         if conexion and conexion.is_connected():
@@ -66,7 +66,7 @@ def gestionar_insercion_contrato(dni, fecha_inicio, fecha_fin, salario_men, obse
             cod_empleado = obtener_cod_empleado_por_dni(cursor, dni)
             if not cod_empleado: return  # Si no se encuentra el empleado, no se continúa
             # Insertar contrato si el empleado no tiene uno
-            insertar_contrato(cursor, cod_empleado, fecha_inicio, fecha_fin, salario_men, observaciones)
+            insertar_contrato(cursor, cod_empleado, fecha_inicio, fecha_fin, salario_men, observaciones, estado)
             conexion.commit()
     except Error as e: print(f"Error al insertar datos: {e}")
     finally:
@@ -75,15 +75,13 @@ def gestionar_insercion_contrato(dni, fecha_inicio, fecha_fin, salario_men, obse
             conexion.close()
 
 # UPDATE CONTRATO
-def actualizar_contrato_por_dni(cursor, dni, fecha_inicio, fecha_fin, salario_men, observaciones):
-    # Utilizamos la función obtener_codigo_contrato_por_dni para buscar el contrato
+def actualizar_contrato_por_dni(cursor, dni, fecha_inicio, fecha_fin, salario_men, observaciones, estado = "activo"):
     cod_contrato = obtener_codigo_contrato_por_dni(cursor, dni)
     if cod_contrato:
-        # Actualizar el contrato con los nuevos datos
         query_update_contrato = """UPDATE Contratos 
-                                   SET fecha_inicio = %s, fecha_fin = %s, salario_men = %s, observaciones = %s
+                                   SET fecha_inicio = %s, fecha_fin = %s, salario_men = %s, observaciones = %s, estado = %s
                                    WHERE cod_contrato = %s"""
-        valores_update = (fecha_inicio, fecha_fin, salario_men, observaciones, cod_contrato)
+        valores_update = (fecha_inicio, fecha_fin, salario_men, observaciones, estado, cod_contrato)
         cursor.execute(query_update_contrato, valores_update)
         print(f"Contrato actualizado correctamente para el empleado con DNI {dni}.")
     else: print(f"No se encontró ningún contrato asociado al empleado con DNI {dni}.")
@@ -93,8 +91,31 @@ def gestionar_actualizacion_contrato(dni, fecha_inicio, fecha_fin, salario_men, 
         conexion = conectar_base_datos("LocalHost", "FabiaNatura", "rodrigo", "ubnt")
         if conexion and conexion.is_connected():
             cursor = conexion.cursor()
-            # Actualizar contrato usando solo el DNI
             actualizar_contrato_por_dni(cursor, dni, fecha_inicio, fecha_fin, salario_men, observaciones)
+            conexion.commit()
+    except Error as e: print(f"Error al actualizar el contrato: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def actualizar_contrato_por_dni_desactivar_activar(cursor, dni, estado):
+    try:
+        cod_contrato = obtener_codigo_contrato_por_dni(cursor, dni)
+        if cod_contrato:
+            query_update_contrato = "UPDATE Contratos SET estado = %s WHERE cod_contrato = %s"
+            valores_update = (estado, cod_contrato)
+            cursor.execute(query_update_contrato, valores_update)
+            print(f"Contrato cambiado a '{estado}' correctamente para el empleado con DNI {dni}.")
+        else: print(f"No se encontró ningún contrato asociado al empleado con DNI {dni}.")
+    except Error as e: print(f"Error al actualizar el contrato para el empleado con DNI {dni}: {e}")
+
+def gestionar_actualizar_contrato_por_dni_desactivar_activar(dni, estado):
+    try:
+        conexion = conectar_base_datos("LocalHost", "FabiaNatura", "rodrigo", "ubnt")
+        if conexion and conexion.is_connected():
+            cursor = conexion.cursor()
+            actualizar_contrato_por_dni_desactivar_activar(cursor, dni, estado)
             conexion.commit()
     except Error as e: print(f"Error al actualizar el contrato: {e}")
     finally:
@@ -108,7 +129,6 @@ def obtener_contratos_y_empleados():
         conexion = conectar_base_datos("LocalHost", "FabiaNatura", "rodrigo", "ubnt")
         if conexion and conexion.is_connected():
             cursor = conexion.cursor()
-            # Consulta para obtener contratos, empleados y nombres
             query = """
             SELECT 
                 Contratos.cod_contrato,
@@ -149,11 +169,9 @@ def obtener_detalles_contrato_por_dni(dni):
         conexion = conectar_base_datos("LocalHost", "FabiaNatura", "rodrigo", "ubnt")
         if conexion and conexion.is_connected():
             cursor = conexion.cursor()
-            # Obtener el código de contrato usando el DNI
             cod_contrato = obtener_codigo_contrato_por_dni(cursor, dni)
             if not cod_contrato:
-                return  # Si no se encuentra el contrato, la función termina
-            # Consulta para obtener detalles del contrato y el empleado
+                return
             query = """
             SELECT 
                 Contratos.cod_contrato,
@@ -175,7 +193,6 @@ def obtener_detalles_contrato_por_dni(dni):
             """
             cursor.execute(query, (cod_contrato,))
             resultado = cursor.fetchone()
-            # Mostrar los detalles del contrato si se encontró
             if resultado:
                 print(f"Código de Contrato: {resultado[0]}")
                 print(f"Fecha Inicio: {resultado[1]}")
