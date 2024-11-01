@@ -14,7 +14,7 @@ CREATE TABLE Personas (
 CREATE TABLE Correos_Persona (
     id_correo VARCHAR(10) NOT NULL PRIMARY KEY,
     dni VARCHAR(8) NOT NULL,
-    correo VARCHAR(50),
+    correo VARCHAR(50) UNIQUE NOT NULL,
     FOREIGN KEY (dni) REFERENCES Personas(dni) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -103,14 +103,14 @@ CREATE TABLE Direcciones_Proveedor (
 CREATE TABLE Correos_Proveedor (
     id_correo VARCHAR(10) NOT NULL PRIMARY KEY,
     ruc VARCHAR(15) NOT NULL,
-    correo VARCHAR(50) NOT NULL,
+    correo VARCHAR(50) UNIQUE NOT NULL,
     FOREIGN KEY (ruc) REFERENCES Proveedores(ruc) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Categorias, con codigo en formato VARCHAR (CAT0X)
 CREATE TABLE Categorias (
     cod_categoria VARCHAR(10) PRIMARY KEY,
-    nombre VARCHAR(20) NOT NULL,
+    nombre VARCHAR(50) UNIQUE NOT NULL,
     descripcion TEXT,
     fecha_registro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -118,7 +118,7 @@ CREATE TABLE Categorias (
 -- Productos, con codigo en formato VARCHAR (PROD0X)
 CREATE TABLE Productos (
     cod_producto VARCHAR(10) PRIMARY KEY,
-    cod_categoria VARCHAR(10) NOT NULL,
+    cod_categoria VARCHAR(10),
     ruc VARCHAR(15),
     nombre VARCHAR(100) UNIQUE NOT NULL,
     linea VARCHAR(100),
@@ -128,11 +128,11 @@ CREATE TABLE Productos (
     stock INT NOT NULL,
     estado ENUM('disponible', 'agotado') NOT NULL,
     fecha_registro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (cod_categoria) REFERENCES Categorias(cod_categoria) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (cod_categoria) REFERENCES Categorias(cod_categoria) ON UPDATE CASCADE ON DELETE SET NULL,
     FOREIGN KEY (ruc) REFERENCES Proveedores(ruc) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
--- Facturas
+-- Facturas F0X
 CREATE TABLE Facturas (
     cod_factura VARCHAR(10) PRIMARY KEY,
     dni VARCHAR(8) NOT NULL,
@@ -144,7 +144,7 @@ CREATE TABLE Facturas (
     FOREIGN KEY (cod_asesor) REFERENCES Asesores(cod_asesor) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
--- Detalles de facturas
+-- Detalles de facturas DF0X
 CREATE TABLE Det_Facturas (
     cod_factura VARCHAR(10) NOT NULL,
     cod_producto VARCHAR(10) NOT NULL,
