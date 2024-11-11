@@ -10,14 +10,6 @@ CREATE TABLE Personas (
     fecha_registro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
--- Correos de personas
-CREATE TABLE Correos_Persona (
-    id_correo VARCHAR(10) NOT NULL PRIMARY KEY,
-    dni VARCHAR(8) NOT NULL,
-    correo VARCHAR(50) UNIQUE NOT NULL,
-    FOREIGN KEY (dni) REFERENCES Personas(dni) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 -- Telefonos de personas
 CREATE TABLE Telefonos_Persona (
 	telefono VARCHAR(9) NOT NULL PRIMARY KEY,
@@ -88,22 +80,6 @@ CREATE TABLE Proveedores (
 CREATE TABLE Telefonos_Proveedor (
     ruc VARCHAR(15) NOT NULL,
     telefono VARCHAR(15) NOT NULL PRIMARY KEY,
-    FOREIGN KEY (ruc) REFERENCES Proveedores(ruc) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
--- Direcciones de proveedores
-CREATE TABLE Direcciones_Proveedor (
-    id_direccion VARCHAR(10) NOT NULL PRIMARY KEY,
-    ruc VARCHAR(15) NOT NULL,
-    direccion VARCHAR(100) NOT NULL,
-    FOREIGN KEY (ruc) REFERENCES Proveedores(ruc) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
--- Correos de proveedores
-CREATE TABLE Correos_Proveedor (
-    id_correo VARCHAR(10) NOT NULL PRIMARY KEY,
-    ruc VARCHAR(15) NOT NULL,
-    correo VARCHAR(50) UNIQUE NOT NULL,
     FOREIGN KEY (ruc) REFERENCES Proveedores(ruc) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
