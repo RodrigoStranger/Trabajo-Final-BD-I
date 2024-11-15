@@ -25,7 +25,7 @@ CREATE TABLE Direcciones_Persona (
     FOREIGN KEY (dni) REFERENCES Personas(dni) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- Empleados, con codigo en formato VARCHAR (EMP0X)
+-- Empleados, con codigo en formato VARCHAR (EMP-0X)
 CREATE TABLE Empleados (
     cod_empleado VARCHAR(10) PRIMARY KEY,
     dni VARCHAR(8) NOT NULL,
@@ -33,19 +33,7 @@ CREATE TABLE Empleados (
     FOREIGN KEY (dni) REFERENCES Personas(dni) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- Contratos, con codigo en formato VARCHAR (CTR0X)
-CREATE TABLE Contratos (
-    cod_contrato VARCHAR(10) PRIMARY KEY,
-    cod_empleado VARCHAR(10) NOT NULL UNIQUE,
-    fecha_inicio DATE NOT NULL,
-    fecha_fin DATE,
-    salario_men FLOAT NOT NULL,
-    observaciones TEXT,
-    estado ENUM('activo', 'inactivo') NOT NULL,
-    FOREIGN KEY (cod_empleado) REFERENCES Empleados(cod_empleado) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
--- Vendedores, con codigo en formato VARCHAR (VEND0X)
+-- Vendedores, con codigo en formato VARCHAR (VEND-0X)
 CREATE TABLE Vendedores (
     cod_vendedor VARCHAR(10) PRIMARY KEY,
     cod_empleado VARCHAR(10) NOT NULL,
@@ -53,7 +41,7 @@ CREATE TABLE Vendedores (
     FOREIGN KEY (cod_empleado) REFERENCES Empleados(cod_empleado) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- Asesores, con codigo en formato VARCHAR (ASE0X)
+-- Asesores, con codigo en formato VARCHAR (ASE-0X)
 CREATE TABLE Asesores (
     cod_asesor VARCHAR(10) PRIMARY KEY,
     cod_empleado VARCHAR(10) NOT NULL,
@@ -67,6 +55,18 @@ CREATE TABLE Clientes (
     dni VARCHAR(8) NOT NULL PRIMARY KEY,
     tipo_cliente VARCHAR(20),
     FOREIGN KEY (dni) REFERENCES Personas(dni) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Contratos, con codigo en formato VARCHAR (CTR-0X)
+CREATE TABLE Contratos (
+    cod_contrato VARCHAR(10) PRIMARY KEY,
+    cod_empleado VARCHAR(10) NOT NULL UNIQUE,
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE,
+    salario_men FLOAT NOT NULL,
+    observaciones TEXT,
+    estado ENUM('activo', 'inactivo') NOT NULL,
+    FOREIGN KEY (cod_empleado) REFERENCES Empleados(cod_empleado) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Proveedores
@@ -83,7 +83,7 @@ CREATE TABLE Telefonos_Proveedor (
     FOREIGN KEY (ruc) REFERENCES Proveedores(ruc) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- Categorias, con codigo en formato VARCHAR (CAT0X)
+-- Categorias, con codigo en formato VARCHAR (CAT-0X)
 CREATE TABLE Categorias (
     cod_categoria VARCHAR(10) PRIMARY KEY,
     nombre VARCHAR(50) UNIQUE NOT NULL,
@@ -91,7 +91,7 @@ CREATE TABLE Categorias (
     fecha_registro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
--- Productos, con codigo en formato VARCHAR (PROD0X)
+-- Productos, con codigo en formato VARCHAR (PROD-0X)
 CREATE TABLE Productos (
     cod_producto VARCHAR(10) PRIMARY KEY,
     cod_categoria VARCHAR(10),
@@ -108,19 +108,19 @@ CREATE TABLE Productos (
     FOREIGN KEY (ruc) REFERENCES Proveedores(ruc) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
--- Facturas F0X
+-- Facturas en formato VARCHAR (F-0X)
 CREATE TABLE Facturas (
     cod_factura VARCHAR(10) PRIMARY KEY,
     dni VARCHAR(8) NOT NULL,
     cod_vendedor VARCHAR(10) NOT NULL,
     cod_asesor VARCHAR(10),
     fecha_registro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (dni) REFERENCES Clientes(dni) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    FOREIGN KEY (cod_vendedor) REFERENCES Vendedores(cod_vendedor) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    FOREIGN KEY (cod_asesor) REFERENCES Asesores(cod_asesor) ON DELETE NO ACTION ON UPDATE NO ACTION
+    FOREIGN KEY (dni) REFERENCES Clientes(dni) ON UPDATE CASCADE,
+    FOREIGN KEY (cod_vendedor) REFERENCES Vendedores(cod_vendedor) ON UPDATE CASCADE,
+    FOREIGN KEY (cod_asesor) REFERENCES Asesores(cod_asesor) ON UPDATE CASCADE
 );
 
--- Detalles de facturas DF0X
+-- Detalles de facturas en formato VARCHAR (DF-0X)
 CREATE TABLE Det_Facturas (
     cod_factura VARCHAR(10) NOT NULL,
     cod_producto VARCHAR(10) NOT NULL,
