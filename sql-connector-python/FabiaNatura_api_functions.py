@@ -1,10 +1,9 @@
 import requests
-
 def generar_datos_dni(dni):
     url = "https://api.consultasperu.com/api/v1/query"
     headers = { "Content-Type": "application/json" }
     data = {
-        "token": "d52a25f105f21909c4dbb19cbf01514282782ad9dcbfa154e087ef6189a0ba33",
+        "token": "19d47b46d71090ad7239d6ac7ac133cfb3ff3ccc15bdfd5938395f0e68096cb3",
         "type_document": "dni",
         "document_number": dni
     }
