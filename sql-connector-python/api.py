@@ -3,7 +3,7 @@ def generar_datos_completos(dni):
     url = "https://api.consultasperu.com/api/v1/query"
     headers = {"Content-Type": "application/json"}
     data = {
-        "token": "19d47b46d71090ad7239d6ac7ac133cfb3ff3ccc15bdfd5938395f0e68096cb3",  # Actualizar si es necesario
+        "token": "19d47b46d71090ad7239d6ac7ac133cfb3ff3ccc15bdfd5938395f0e68096cb3",
         "type_document": "dni",
         "document_number": dni
     }
