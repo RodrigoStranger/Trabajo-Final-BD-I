@@ -1,5 +1,4 @@
 import requests
-#rama 2
 def generar_datos_dni(dni):
     url = "https://api.consultasperu.com/api/v1/query"
     headers = { "Content-Type": "application/json" }
