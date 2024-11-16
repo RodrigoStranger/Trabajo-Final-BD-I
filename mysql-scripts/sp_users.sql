@@ -1,4 +1,5 @@
 USE FabiaNatura;
+-- Total de procedimientos : 10
 
 -- CREACIÓN:
 -- Insertar un Cliente
@@ -17,8 +18,8 @@ CREATE PROCEDURE AgregarCliente(
 BEGIN
     START TRANSACTION;
     INSERT INTO Personas (dni, nombre, apellido_paterno, apellido_materno, fecha_nacimiento) VALUES (p_dni, p_nombre, p_apellido_paterno, p_apellido_materno, p_fecha_nacimiento);
-    INSERT INTO Telefonos_Persona (telefono, dni) VALUES (p_telefono, p_dni);
-    INSERT INTO Direcciones_Persona (dni, direccion) VALUES (p_dni, p_direccion);
+    INSERT INTO Telefonos_Personas (telefono, dni) VALUES (p_telefono, p_dni);
+    INSERT INTO Direcciones_Personas (dni, direccion) VALUES (p_dni, p_direccion);
     INSERT INTO Clientes (dni, tipo_cliente) VALUES (p_dni, 'regular');
     COMMIT;
 END$$
@@ -39,8 +40,8 @@ BEGIN
     DECLARE empleado_id INT;
     START TRANSACTION;
     INSERT INTO Personas (dni, nombre, apellido_paterno, apellido_materno, fecha_nacimiento) VALUES (p_dni, p_nombre, p_apellido_paterno, p_apellido_materno, p_fecha_nacimiento);
-    INSERT INTO Telefonos_Persona (telefono, dni) VALUES (p_telefono, p_dni);
-    INSERT INTO Direcciones_Persona (dni, direccion) VALUES (p_dni, p_direccion);
+    INSERT INTO Telefonos_Personas (telefono, dni) VALUES (p_telefono, p_dni);
+    INSERT INTO Direcciones_Personas (dni, direccion) VALUES (p_dni, p_direccion);
     INSERT INTO Empleados (dni, estado) VALUES (p_dni, 'activo');
     SET empleado_id = LAST_INSERT_ID();
     INSERT INTO Vendedores (cod_empleado, rol) VALUES (empleado_id, p_rol);
@@ -64,8 +65,8 @@ BEGIN
     DECLARE empleado_id INT;
     START TRANSACTION;
     INSERT INTO Personas (dni, nombre, apellido_paterno, apellido_materno, fecha_nacimiento) VALUES (p_dni, p_nombre, p_apellido_paterno, p_apellido_materno, p_fecha_nacimiento);
-    INSERT INTO Telefonos_Persona (telefono, dni) VALUES (p_telefono, p_dni);
-    INSERT INTO Direcciones_Persona (dni, direccion) VALUES (p_dni, p_direccion);
+    INSERT INTO Telefonos_Personas (telefono, dni) VALUES (p_telefono, p_dni);
+    INSERT INTO Direcciones_Personas (dni, direccion) VALUES (p_dni, p_direccion);
     INSERT INTO Empleados (dni, estado) VALUES (p_dni, 'activo');
     SET empleado_id = LAST_INSERT_ID();
     INSERT INTO Asesores (cod_empleado, experiencia, especialidad) VALUES (empleado_id, p_experiencia, p_especialidad);
@@ -85,7 +86,7 @@ CREATE PROCEDURE EditarTelefono(
     IN p_telefono_nuevo VARCHAR(9)
 )
 BEGIN
-    UPDATE Telefonos_Persona SET telefono = p_telefono_nuevo WHERE dni = p_dni;
+    UPDATE Telefonos_Personas SET telefono = p_telefono_nuevo WHERE dni = p_dni;
 END$$
 DELIMITER ;
 
@@ -95,7 +96,7 @@ CREATE PROCEDURE EditarDireccion(
     IN p_direccion_nueva VARCHAR(100)
 )
 BEGIN
-    UPDATE Direcciones_Persona SET direccion = p_direccion_nueva WHERE dni = p_dni;
+    UPDATE Direcciones_Personas SET direccion = p_direccion_nueva WHERE dni = p_dni;
 END$$
 DELIMITER ;
 

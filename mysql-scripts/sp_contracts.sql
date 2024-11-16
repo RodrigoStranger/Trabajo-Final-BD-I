@@ -1,4 +1,5 @@
 USE FabiaNatura;
+-- Total de procedimientos : 5
 
 -- CREACIÓN:
 -- Creación de un Contrato: se debe de asignar al empleado con dni

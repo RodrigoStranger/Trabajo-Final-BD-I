@@ -11,14 +11,14 @@ CREATE TABLE Personas (
 );
 
 -- Teléfonos de Personas
-CREATE TABLE Telefonos_Persona (
+CREATE TABLE Telefonos_Personas (
     telefono VARCHAR(9) NOT NULL PRIMARY KEY,
     dni VARCHAR(8) NOT NULL,
     FOREIGN KEY (dni) REFERENCES Personas(dni) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Direcciones de Personas
-CREATE TABLE Direcciones_Persona (
+CREATE TABLE Direcciones_Personas (
     id_direccion INT AUTO_INCREMENT PRIMARY KEY,
     dni VARCHAR(8) NOT NULL,
     direccion VARCHAR(100),
@@ -77,7 +77,7 @@ CREATE TABLE Proveedores (
 );
 
 -- Teléfonos de Proveedores
-CREATE TABLE Telefonos_Proveedor (
+CREATE TABLE Telefonos_Proveedores (
     ruc VARCHAR(15) NOT NULL,
     telefono VARCHAR(15) NOT NULL PRIMARY KEY,
     FOREIGN KEY (ruc) REFERENCES Proveedores(ruc) ON DELETE CASCADE ON UPDATE CASCADE
