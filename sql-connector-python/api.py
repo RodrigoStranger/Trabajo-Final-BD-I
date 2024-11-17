@@ -12,14 +12,12 @@ def generar_datos_completos(dni):
         response_data = response.json()
         if response_data.get("success"):
             data = response_data.get("data", {})
-            # Procesar datos personales
             nombre_completo = data.get("full_name", "").split()
             nombre = nombre_completo[0].capitalize() if nombre_completo else ""
             apellidos = data.get("surname", "").split()
             apellido_paterno = apellidos[0].capitalize() if len(apellidos) > 0 else ""
             apellido_materno = apellidos[1].capitalize() if len(apellidos) > 1 else ""
             fecha_nacimiento = data.get("date_of_birth", "")
-            # Procesar dirección
             direccion = data.get("address", "").capitalize()
             return {
                 "nombre": nombre,
