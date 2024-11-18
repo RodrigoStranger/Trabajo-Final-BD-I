@@ -1,5 +1,5 @@
 USE FabiaNatura;
-SELECT * FROM Productos;
+
 -- Inserción de datos en la tabla Proveedores
 INSERT INTO Proveedores (ruc, nombre) VALUES
 ('20101796532', 'NATURA COSMETICOS S.A.'),
