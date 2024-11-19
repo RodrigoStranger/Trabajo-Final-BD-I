@@ -14,6 +14,20 @@ BEGIN
 END$$
 DELIMITER ;
 
+-- verificar si un telefono existe
+DELIMITER $$
+CREATE FUNCTION VerificarTelefonoExiste(p_telefono VARCHAR(9))
+RETURNS TINYINT
+DETERMINISTIC
+BEGIN
+    DECLARE existe INT;
+    SELECT COUNT(*) INTO existe
+		FROM Telefonos_Personas
+		WHERE telefono = p_telefono;
+    RETURN IF(existe > 0, 1, 0);
+END$$
+DELIMITER ;
+
 -- Obtener el codigo de un empleado sabiendo su dni
 DELIMITER $$
 CREATE FUNCTION ObtenerCodEmpleado(p_dni VARCHAR(8))

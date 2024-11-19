@@ -11,7 +11,26 @@ def persona_existe(dni):
             resultado = cursor.fetchone()
             existe = resultado[0]  # 1 para TRUE, 0 para FALSE
             return True if existe == 1 else False
-    except Error as e: print(f"Error al conectar con la base de datos: {e}")
+    except Error as e: 
+        print(f"Error al conectar con la base de datos: {e}")
+        return False
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def telefono_existe(telefono):
+    try:
+        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        if conexion.is_connected():
+            cursor = conexion.cursor()
+            query = f"SELECT VerificarTelefonoExiste('{telefono}') AS ExisteTelefono;"
+            cursor.execute(query)
+            resultado = cursor.fetchone()
+            return resultado[0] == 1  # Retorna True si existe, False si no
+    except Error as e:
+        print(f"Error al conectar con la base de datos: {e}")
+        return False
     finally:
         if conexion.is_connected():
             cursor.close()
