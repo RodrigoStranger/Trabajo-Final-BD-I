@@ -1,6 +1,22 @@
 from functions import *
 from api import *
 
+def persona_existe(dni):
+    try:
+        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        if conexion.is_connected():
+            cursor = conexion.cursor()
+            query = f"SELECT VerificarPersonaExiste('{dni}') AS Existe;"
+            cursor.execute(query)
+            resultado = cursor.fetchone()
+            existe = resultado[0]  # 1 para TRUE, 0 para FALSE
+            return True if existe == 1 else False
+    except Error as e: print(f"Error al conectar con la base de datos: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
 def insertar_cliente(dni, telefono):
     datos = generar_datos_completos(dni)
     if datos:
@@ -83,3 +99,109 @@ def insertar_asesor(dni, telefono, experiencia, especialidad):
                 cursor.close()
                 conexion.close()
     else: print("No se pudieron obtener los datos del asesor desde la API.")
+
+
+def editar_telefono(dni, telefono_nuevo):
+    try:
+        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        if conexion.is_connected():
+            cursor = conexion.cursor()
+            cursor.callproc('EditarTelefono', [dni, telefono_nuevo])
+            conexion.commit()
+            print(f"Teléfono actualizado correctamente para el DNI {dni}.")
+    except Exception as e:
+        print(f"Error al actualizar el teléfono: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def editar_direccion(dni, direccion_nueva):
+    try:
+        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        if conexion.is_connected():
+            cursor = conexion.cursor()
+            cursor.callproc('EditarDireccion', [dni, direccion_nueva])
+            conexion.commit()
+            print(f"Dirección actualizada correctamente para el DNI {dni}.")
+    except Exception as e:
+        print(f"Error al actualizar la dirección: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def editar_especialidad_asesor(dni, especialidad_nueva):
+    try:
+        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        if conexion.is_connected():
+            cursor = conexion.cursor()
+            cursor.callproc('EditarEspecialidadAsesor', [dni, especialidad_nueva])
+            conexion.commit()
+            print(f"Especialidad actualizada correctamente para el DNI {dni}.")
+    except Exception as e:
+        print(f"Error al actualizar la especialidad: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def editar_experiencia_asesor(dni, experiencia_nueva):
+    try:
+        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        if conexion.is_connected():
+            cursor = conexion.cursor()
+            cursor.callproc('EditarExperienciaAsesor', [dni, experiencia_nueva])
+            conexion.commit()
+            print(f"Experiencia actualizada correctamente para el DNI {dni}.")
+    except Exception as e:
+        print(f"Error al actualizar la experiencia: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def editar_rol_vendedor(dni, rol_nuevo):
+    try:
+        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        if conexion.is_connected():
+            cursor = conexion.cursor()
+            cursor.callproc('EditarRolVendedor', [dni, rol_nuevo])
+            conexion.commit()
+            print(f"Rol actualizado correctamente para el DNI {dni}.")
+    except Exception as e:
+        print(f"Error al actualizar el rol: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def cambiar_estado_asesor(dni, nuevo_estado):
+    try:
+        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        if conexion.is_connected():
+            cursor = conexion.cursor()
+            cursor.callproc('CambiarEstadoAsesor', [dni, nuevo_estado])
+            conexion.commit()
+            print(f"Estado del asesor con DNI {dni} cambiado a {nuevo_estado}.")
+    except Exception as e:
+        print(f"Error al cambiar el estado del asesor: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def cambiar_estado_vendedor(dni, nuevo_estado):
+    try:
+        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        if conexion.is_connected():
+            cursor = conexion.cursor()
+            cursor.callproc('CambiarEstadoVendedor', [dni, nuevo_estado])
+            conexion.commit()
+            print(f"Estado del vendedor con DNI {dni} cambiado a {nuevo_estado}.")
+    except Exception as e:
+        print(f"Error al cambiar el estado del vendedor: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()

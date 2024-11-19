@@ -16,8 +16,7 @@ def menu_gestion_personal():
         elif opcion == "2":
             menu_asesores()
         elif opcion == "3":
-            print("Saliendo del sistema...")
-            print("¡Gracias por usar FabiaNatura!")
+            print("Volviendo a la ventana principal...")
             break
         else:
             print("Opción inválida. Intente de nuevo.")
