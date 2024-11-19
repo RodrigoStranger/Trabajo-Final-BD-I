@@ -1,5 +1,68 @@
 USE FabiaNatura;
 
+-- Insertar en la tabla Personas
+INSERT INTO Personas (dni, nombre, apellido_paterno, apellido_materno, fecha_nacimiento) VALUES 
+('89281109', 'Valeria', 'Infanzón', 'Cantoral', '1980-02-22'), -- Vendedor
+('78291222', 'Mario', 'Perez', 'Videla', '1990-06-12'),       -- Asesor
+('71827188', 'Maria', 'Gomez', 'Torrez', '2002-10-11');       -- Cliente
+
+-- Insertar en la tabla Telefonos_Personas
+INSERT INTO Telefonos_Personas (telefono, dni) VALUES 
+('982819222', '89281109'), -- Teléfono de Vendedor
+('982712212', '78291222'), -- Teléfono de Asesor
+('98291822', '71827188');  -- Teléfono de Cliente
+
+-- Insertar en la tabla Direcciones_Personas
+INSERT INTO Direcciones_Personas (dni, direccion) VALUES 
+('89281109', 'Pj pepe 209'),        -- Dirección de Vendedor
+('78291222', 'Calle Callao 409'),   -- Dirección de Asesor
+('71827188', 'Calle Callao 902');   -- Dirección de Cliente
+
+-- Insertar Vendedor y Asesor como Empleados
+INSERT INTO Empleados (dni, estado) VALUES 
+('89281109', 'activo'), -- Vendedor
+('78291222', 'activo'); -- Asesor
+
+-- Insertar Vendedor en Vendedores
+INSERT INTO Vendedores (cod_empleado, rol)
+SELECT cod_empleado, 'supervisor'
+FROM Empleados
+WHERE dni = '89281109';
+
+-- Insertar Asesor en Asesores
+INSERT INTO Asesores (cod_empleado, experiencia, especialidad)
+SELECT cod_empleado, 5, 'Dermatologo'
+FROM Empleados
+WHERE dni = '78291222';
+
+-- Insertar Cliente en Clientes
+INSERT INTO Clientes (dni, tipo_cliente) VALUES 
+('71827188', 'regular');
+
+-- Insertar el contrato para el vendedor
+INSERT INTO Contratos (cod_empleado, fecha_inicio, fecha_fin, salario_men, observaciones, estado)
+VALUES 
+(
+    (SELECT cod_empleado FROM Empleados WHERE dni = '89281109'), -- Código del empleado (vendedor)
+    '2024-01-01', -- Fecha de inicio del contrato
+    '2024-12-31', -- Fecha de fin del contrato
+    2000.00,      -- Salario mensual
+    'Contrato anual para el vendedor Valeria Infanzón.', -- Observaciones
+    'activo'      -- Estado del contrato
+);
+
+-- Insertar el contrato para el asesor
+INSERT INTO Contratos (cod_empleado, fecha_inicio, fecha_fin, salario_men, observaciones, estado)
+VALUES 
+(
+    (SELECT cod_empleado FROM Empleados WHERE dni = '78291222'), -- Código del empleado (asesor)
+    '2024-01-01', -- Fecha de inicio del contrato
+    '2024-12-31', -- Fecha de fin del contrato
+    2500.00,      -- Salario mensual
+    'Contrato anual para el asesor Mario Perez.', -- Observaciones
+    'activo'      -- Estado del contrato
+);
+
 -- Inserción de datos en la tabla Proveedores
 INSERT INTO Proveedores (ruc, nombre) VALUES
 ('20101796532', 'NATURA COSMETICOS S.A.'),
@@ -119,3 +182,12 @@ INSERT INTO Productos (cod_categoria, ruc, nombre, linea, descripcion, precio_co
 (5, '20517667502', 'Aceite relajante para masaje', 'Emotions relax', 'Aceite de masaje con extractos naturales que relajan los músculos y promueven un estado de bienestar.', 49.9, 59.9, 13, 'disponible'),
 (5, '20517667502', 'Gel exfoliante corporal', 'Calming vibes', 'Gel exfoliante con partículas naturales que remueven las células muertas mientras relajan los sentidos con su aroma suave.', 42.0, 50.4, 10, 'disponible'),
 (5, '20517667502', 'Spray aromático para almohadas y ambiente', 'Agú', 'Spray formulado con aceites esenciales que ayuda a crear un ambiente relajante, ideal para promover un descanso profundo.', 50.0, 60.0, 10, 'disponible');
+
+-- Prueba de Facturas
+INSERT INTO Facturas (dni, cod_vendedor, cod_asesor) VALUES 
+('71827188', 1, NULL); 
+
+-- Prueba de Detalle de Facturas
+INSERT INTO Detalle_Facturas (cod_factura, cod_producto, cantidad) VALUES 
+(1, 1, 2), -- Producto 1 con cantidad 2
+(1, 2, 1);
