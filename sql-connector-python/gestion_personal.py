@@ -1,12 +1,12 @@
 import os
-from users import *
+from functions_users import *
 
 def limpiar_pantalla(): os.system('cls' if os.name == 'nt' else 'clear')
 
 def menu_gestion_personal():
     while True:
         limpiar_pantalla()
-        print("=== Gestión de Personal - FabiaNatura ===")
+        print("=== Gestión de Personal ===")
         print("1. Gestión de Vendedores")
         print("2. Gestión de Asesores")
         print("3. Salir")

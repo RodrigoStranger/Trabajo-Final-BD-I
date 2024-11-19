@@ -1,6 +1,5 @@
-from users import *
-from functions import *
-from menus_admin import * 
+from functions_users import *
+from gestion_personal import * 
 
 if __name__ == "__main__":
     print("Bienvenido a FabiaNatura")
