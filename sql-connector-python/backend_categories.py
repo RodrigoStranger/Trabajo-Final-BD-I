@@ -28,7 +28,7 @@ def agregar_categoria(nombre, descripcion):
             cursor = conexion.cursor()
             cursor.callproc('AgregarCategoria', [nombre, descripcion])
             conexion.commit()
-            print(f"La categoría '{nombre}' fue creada exitosamente.")
+            print(f"La categoría {nombre} fue creada exitosamente.")
     except Error as e:
         print(f"Error al agregar la categoría: {e}")
     finally:
