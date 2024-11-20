@@ -20,3 +20,4 @@ def agregar_producto(cod_categoria, ruc, nombre, linea, descripcion, precio_comp
             cursor.close()
             conexion.close()
 
+

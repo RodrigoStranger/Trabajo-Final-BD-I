@@ -5,8 +5,8 @@ from fronted_suppliers import menu_gestion_proveedores
 from fronted_productos import agregar_producto_menu
 
 if __name__ == "__main__":
-    #menu_gestion_personal() 
-    menu_gestion_contratos()
+    menu_gestion_personal() 
+    #menu_gestion_contratos()
     #agregar_producto_menu()
     #menu_gestion_proveedores()
 
