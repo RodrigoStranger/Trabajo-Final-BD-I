@@ -24,7 +24,8 @@ def menu_gestion_contratos():
             print("Función pendiente de desarrollo. Presione Enter para continuar...")
             input()
         elif opcion == "5":
-            print("Saliendo del menú de Gestión de Contratos...")
+            print("Volviendo a la ventana principal...")
+            input("Presione Enter para continuar...")
             break
         else:
             print("Opción no válida. Intente nuevamente.")
@@ -71,6 +72,8 @@ def editar_contrato_menu():
                 print("El DNI ingresado no pertenece a ninguna persona registrada. Intente nuevamente.")
         else:
             print("El DNI debe tener exactamente 8 dígitos numéricos. Intente nuevamente.")
+    limpiar_pantalla()
+    print(f"=== Empleado {dni} ===")
     print("1. Editar sueldo")
     print("2. Editar fechas")
     print("3. Editar observaciones")
