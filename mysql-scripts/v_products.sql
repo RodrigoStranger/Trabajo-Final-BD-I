@@ -29,7 +29,7 @@ ORDER BY cod_producto DESC;
 -- SELECT * FROM MostrarProductosAgotados;
 
 -- Vista para poder mostrar que productos han sido vendidos, con su cantidad vendida y monto recaudado
-CREATE VIEW ProductosVendidos AS
+CREATE VIEW MostrarProductosVendidos AS
 SELECT 
     p.cod_producto AS CodigoProducto,
     p.nombre AS NombreProducto,
@@ -48,4 +48,4 @@ GROUP BY
 ORDER BY 
     TotalVenta DESC;
 
--- SELECT * FROM ProductosVendidos;
+-- SELECT * FROM MostrarProductosVendidos;
