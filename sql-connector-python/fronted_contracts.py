@@ -38,6 +38,7 @@ def agregar_contrato_menu():
     print("Empleados disponibles: ")
     mostrar_empleados()
     while True:
+        print("Agrega un contrato solo al empleado que no lo posea.....")
         dni = input("Ingrese el dni del empleado: ")
         if len(dni) == 8 and dni.isdigit():
             if persona_existe(dni):
@@ -59,7 +60,9 @@ def agregar_contrato_menu():
     fecha_fin = input("Ingrese la fecha de fin (YYYY-MM-DD) (Opcional, puede dejar en blanco): ")
     if fecha_fin.strip() == "":
         fecha_fin = None
-    observaciones = input("Ingrese observaciones del contrato: ")
+    observaciones = input("Ingrese observaciones del contrato (Opcional, puede dejar en blanco): ")
+    if observaciones.strip() == "":
+        observaciones = None
     agregar_contrato(dni, fecha_inicio, fecha_fin, salario, observaciones)
     input("Presione Enter para continuar...")
 

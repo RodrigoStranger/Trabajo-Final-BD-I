@@ -14,7 +14,7 @@ def mostrar_empleados():
         empleados = cursor.fetchall()
         if empleados:
             from tabulate import tabulate
-            headers = ["DNI", "CodigoEmpleado", "Nombre", "ApellidoPaterno", "ApellidoMaterno"]
+            headers = ["DNI", "CodigoEmpleado", "Nombre", "ApellidoPaterno", "ApellidoMaterno", "TieneContrato"]
             print(tabulate(empleados, headers=headers, tablefmt="grid"))
         else:
             print("No hay empleados disponibles.")
@@ -37,7 +37,7 @@ def mostrar_vendedores():
         vendedores = cursor.fetchall()
         if vendedores:
             from tabulate import tabulate
-            headers = ["DNI", "CodigoVendedor", "Nombre", "ApellidoPaterno", "ApellidoMaterno", "Rol"]
+            headers = ["DNI", "CodigoVendedor", "Nombre", "ApellidoPaterno", "ApellidoMaterno", "Rol", "TieneContrato"]
             print(tabulate(vendedores, headers=headers, tablefmt="grid"))
         else:
             print("No hay vendedores disponibles.")
@@ -60,7 +60,7 @@ def mostrar_asesores():
         asesores = cursor.fetchall()
         if asesores:
             from tabulate import tabulate
-            headers = ["DNI", "CodigoAsesor", "Nombre", "ApellidoPaterno", "ApellidoMaterno", "Especialidad", "Experiencia"]
+            headers = ["DNI", "CodigoAsesor", "Nombre", "ApellidoPaterno", "ApellidoMaterno", "Especialidad", "Experiencia", "TieneContrato"]
             print(tabulate(asesores, headers=headers, tablefmt="grid"))
         else:
             print("No hay asesores disponibles.")

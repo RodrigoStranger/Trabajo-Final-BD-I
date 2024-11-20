@@ -7,13 +7,20 @@ SELECT
     e.cod_empleado AS CodigoEmpleado,
     p.nombre AS Nombre,
     p.apellido_paterno AS ApellidoPaterno,
-    p.apellido_materno AS ApellidoMaterno
+    p.apellido_materno AS ApellidoMaterno,
+    CASE 
+        WHEN c.cod_contrato IS NOT NULL THEN 'Sí'
+        ELSE 'No'
+    END AS TieneContrato
 FROM 
     Personas p
 JOIN 
     Empleados e ON p.dni = e.dni
+LEFT JOIN 
+    Contratos c ON e.cod_empleado = c.cod_empleado
 ORDER BY 
-	cod_empleado ASC;
+    e.cod_empleado ASC;
+
 
 -- SELECT * FROM MostrarEmpleados;
 
@@ -25,15 +32,22 @@ SELECT
     p.nombre AS Nombre,
     p.apellido_paterno AS ApellidoPaterno,
     p.apellido_materno AS ApellidoMaterno,
-    v.rol AS Rol
+    v.rol AS Rol,
+    CASE 
+        WHEN c.cod_contrato IS NOT NULL THEN 'Sí'
+        ELSE 'No'
+    END AS TieneContrato
 FROM 
     Personas p
 JOIN 
     Empleados e ON p.dni = e.dni
 JOIN 
     Vendedores v ON e.cod_empleado = v.cod_empleado
+LEFT JOIN 
+    Contratos c ON e.cod_empleado = c.cod_empleado
 ORDER BY 
-	cod_vendedor ASC;
+    v.cod_vendedor ASC;
+
     
 -- SELECT * FROM MostrarVendedores;
 
@@ -46,13 +60,19 @@ SELECT
     p.apellido_paterno AS ApellidoPaterno,
     p.apellido_materno AS ApellidoMaterno,
     a.especialidad AS Especialidad,
-    a.experiencia AS Experiencia
+    a.experiencia AS Experiencia,
+    CASE 
+        WHEN c.cod_contrato IS NOT NULL THEN 'Sí'
+        ELSE 'No'
+    END AS TieneContrato
 FROM 
     Personas p
 JOIN 
     Empleados e ON p.dni = e.dni
 JOIN 
     Asesores a ON e.cod_empleado = a.cod_empleado
+LEFT JOIN 
+    Contratos c ON e.cod_empleado = c.cod_empleado
 ORDER BY 
     a.cod_asesor ASC;
 
