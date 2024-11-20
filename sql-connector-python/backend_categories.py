@@ -8,7 +8,7 @@ def mostrar_categorias():
             print("No se pudo conectar a la base de datos.")
             return
         cursor = conexion.cursor()
-        query = "SELECT * FROM VistaCategorias;"
+        query = "SELECT * FROM MostrarCategorias;"
         cursor.execute(query)
         categorias = cursor.fetchall()
         if categorias:

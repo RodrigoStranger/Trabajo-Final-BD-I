@@ -1,5 +1,76 @@
 from backend_general import *
 from backend_api import *
+from tabulate import tabulate # pip install tabulate 
+
+def mostrar_empleados():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarEmpleados;"
+        cursor.execute(query)
+        empleados = cursor.fetchall()
+        if empleados:
+            from tabulate import tabulate
+            headers = ["DNI", "CodigoEmpleado", "Nombre", "ApellidoPaterno", "ApellidoMaterno"]
+            print(tabulate(empleados, headers=headers, tablefmt="grid"))
+        else:
+            print("No hay empleados disponibles.")
+    except Exception as e:
+        print(f"Error al consultar empleados: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_vendedores():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarVendedores;"
+        cursor.execute(query)
+        vendedores = cursor.fetchall()
+        if vendedores:
+            from tabulate import tabulate
+            headers = ["DNI", "CodigoVendedor", "Nombre", "ApellidoPaterno", "ApellidoMaterno", "Rol"]
+            print(tabulate(vendedores, headers=headers, tablefmt="grid"))
+        else:
+            print("No hay vendedores disponibles.")
+    except Exception as e:
+        print(f"Error al consultar vendedores: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_asesores():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarAsesores;"
+        cursor.execute(query)
+        asesores = cursor.fetchall()
+        if asesores:
+            from tabulate import tabulate
+            headers = ["DNI", "CodigoAsesor", "Nombre", "ApellidoPaterno", "ApellidoMaterno", "Especialidad", "Experiencia"]
+            print(tabulate(asesores, headers=headers, tablefmt="grid"))
+        else:
+            print("No hay asesores disponibles.")
+    except Exception as e:
+        print(f"Error al consultar asesores: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
 
 def persona_existe(dni):
     try:

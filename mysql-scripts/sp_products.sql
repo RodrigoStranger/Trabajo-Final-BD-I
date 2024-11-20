@@ -172,3 +172,29 @@ END$$
 DELIMITER ;
 
 -- MOSTRAR:
+-- buscar productos por nombre o medio nombre
+DELIMITER $$
+CREATE PROCEDURE BuscarProductos(
+    IN p_busqueda VARCHAR(100)
+)
+BEGIN
+    DECLARE total_resultados INT;
+    SELECT COUNT(*) INTO total_resultados
+    FROM Productos
+    WHERE nombre LIKE CONCAT('%', p_busqueda, '%');
+    IF total_resultados = 0 THEN
+        SELECT 'No se encontraron productos que coincidan con la búsqueda.' AS Mensaje;
+    ELSE
+        SELECT 
+            p.cod_producto AS Codigo,
+            p.nombre AS Nombre,
+            pr.nombre AS Proveedor,
+            p.stock AS Stock,
+            p.precio_venta AS PrecioUnitario
+        FROM Productos p
+        LEFT JOIN Proveedores pr ON p.ruc = pr.ruc
+        WHERE p.nombre LIKE CONCAT('%', p_busqueda, '%')
+        ORDER BY p.cod_producto;
+    END IF;
+END$$
+DELIMITER ;

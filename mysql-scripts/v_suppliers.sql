@@ -1,7 +1,7 @@
 USE FabiaNatura;
 
 -- mostrar todas las categorias
-CREATE VIEW VistaProveedores AS
+CREATE VIEW MostrarProveedores AS
 SELECT 
     ruc AS RUC, 
     nombre AS Nombre

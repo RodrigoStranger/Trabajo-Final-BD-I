@@ -1,7 +1,7 @@
 USE FabiaNatura;
 
 -- mostrar todas las categorias
-CREATE VIEW VistaCategorias AS
+CREATE VIEW MostrarCategorias AS
 SELECT 
     cod_categoria AS Codigo, 
     nombre AS Nombre

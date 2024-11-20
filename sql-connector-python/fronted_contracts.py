@@ -1,6 +1,7 @@
 import os
 from backend_users import *
 from backend_contracts import *
+from backend_users import mostrar_empleados
 
 def limpiar_pantalla(): os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -34,6 +35,8 @@ def menu_gestion_contratos():
 def agregar_contrato_menu():
     limpiar_pantalla()
     print("=== Agregar un Contrato ===")
+    print("Empleados disponibles: ")
+    mostrar_empleados()
     while True:
         dni = input("Ingrese el dni del empleado: ")
         if len(dni) == 8 and dni.isdigit():
@@ -63,6 +66,8 @@ def agregar_contrato_menu():
 def editar_contrato_menu():
     limpiar_pantalla()
     print("=== Editar un Contrato ===")
+    print("Empleados disponibles: ")
+    mostrar_empleados()
     while True:
         dni = input("Ingrese el DNI del empleado: ")
         if len(dni) == 8 and dni.isdigit():
@@ -105,6 +110,8 @@ def editar_contrato_menu():
 def cambiar_estado_contrato_menu():
     limpiar_pantalla()
     print("=== Cambiar Estado de un Contrato ===")
+    print("Empleados disponibles: ")
+    mostrar_empleados()
     while True:
         dni = input("Ingrese el DNI del empleado: ")
         if len(dni) == 8 and dni.isdigit():

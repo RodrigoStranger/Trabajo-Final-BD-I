@@ -8,7 +8,7 @@ def mostrar_proveedores():
             print("No se pudo conectar a la base de datos.")
             return
         cursor = conexion.cursor()
-        query = "SELECT * FROM VistaProveedores;"
+        query = "SELECT * FROM MostrarProveedores;"
         cursor.execute(query)
         proveedores = cursor.fetchall()
         if proveedores:
