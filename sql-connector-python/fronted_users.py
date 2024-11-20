@@ -41,7 +41,8 @@ def menu_gestion_vendedores():
             estado_vendedor_menu()
         elif opcion == "4":
             #estadisticas_vendedor()
-            print("xd")
+            print("Función pendiente de desarrollo. Presione Enter para continuar...")
+            input()
         elif opcion == "5":
             print("Volviendo a la Gestión principal...")
             input("Presione Enter para continuar...")
@@ -173,7 +174,8 @@ def menu_asesores():
         elif opcion == "3":
             estado_asesor_menu()
         elif opcion == "4":
-            print("xd")
+            print("Función pendiente de desarrollo. Presione Enter para continuar...")
+            input()
             #estadisticas_asesor_menu()
         elif opcion == "5":
             print("Volviendo a la Gestión principal...")
