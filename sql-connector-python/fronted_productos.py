@@ -6,7 +6,7 @@ from backend_categories import mostrar_categorias
 def limpiar_pantalla(): os.system('cls' if os.name == 'nt' else 'clear')
 
 
-
+## falta agregar lo del menu y cosas xd
 
 
 def agregar_producto_menu():
