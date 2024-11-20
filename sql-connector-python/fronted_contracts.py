@@ -1,6 +1,6 @@
 import os
-from functions_users import *
-from functions_contracts import *
+from backend_users import *
+from backend_contracts import *
 
 def limpiar_pantalla(): os.system('cls' if os.name == 'nt' else 'clear')
 

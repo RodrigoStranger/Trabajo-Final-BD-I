@@ -1,4 +1,4 @@
-from functions import *
+from backend_general import *
 
 def agregar_contrato(dni, fecha_inicio, fecha_fin, salario_mensual, observaciones):
     try:

@@ -1,5 +1,5 @@
-from functions import *
-from api import *
+from backend_general import *
+from backend_api import *
 
 def persona_existe(dni):
     try:
