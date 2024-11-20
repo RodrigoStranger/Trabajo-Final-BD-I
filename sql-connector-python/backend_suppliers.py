@@ -45,7 +45,7 @@ def agregar_proveedor(ruc, nombre, telefono):
             cursor = conexion.cursor()
             cursor.callproc('AgregarProveedor', [ruc, nombre, telefono])
             conexion.commit()
-            print(f"Proveedor '{nombre}' con RUC {ruc} creado exitosamente.")
+            print(f"Proveedor {nombre} con RUC {ruc} creado exitosamente.")
     except Error as e:
         print(f"Error al agregar el proveedor: {e}")
     finally:
