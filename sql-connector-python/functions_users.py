@@ -127,7 +127,7 @@ def editar_telefono(dni, telefono_nuevo):
             cursor = conexion.cursor()
             cursor.callproc('EditarTelefono', [dni, telefono_nuevo])
             conexion.commit()
-            print(f"Teléfono actualizado correctamente para el DNI {dni}.")
+            print(f"Teléfono actualizado correctamente para el dni {dni}.")
     except Exception as e:
         print(f"Error al actualizar el teléfono: {e}")
     finally:
@@ -142,7 +142,7 @@ def editar_direccion(dni, direccion_nueva):
             cursor = conexion.cursor()
             cursor.callproc('EditarDireccion', [dni, direccion_nueva])
             conexion.commit()
-            print(f"Dirección actualizada correctamente para el DNI {dni}.")
+            print(f"Dirección actualizada correctamente para el dni {dni}.")
     except Exception as e:
         print(f"Error al actualizar la dirección: {e}")
     finally:
@@ -157,7 +157,7 @@ def editar_especialidad_asesor(dni, especialidad_nueva):
             cursor = conexion.cursor()
             cursor.callproc('EditarEspecialidadAsesor', [dni, especialidad_nueva])
             conexion.commit()
-            print(f"Especialidad actualizada correctamente para el DNI {dni}.")
+            print(f"Especialidad actualizada correctamente para el dni {dni}.")
     except Exception as e:
         print(f"Error al actualizar la especialidad: {e}")
     finally:
@@ -172,7 +172,7 @@ def editar_experiencia_asesor(dni, experiencia_nueva):
             cursor = conexion.cursor()
             cursor.callproc('EditarExperienciaAsesor', [dni, experiencia_nueva])
             conexion.commit()
-            print(f"Experiencia actualizada correctamente para el DNI {dni}.")
+            print(f"Experiencia actualizada correctamente para el dni {dni}.")
     except Exception as e:
         print(f"Error al actualizar la experiencia: {e}")
     finally:
@@ -187,7 +187,7 @@ def editar_rol_vendedor(dni, rol_nuevo):
             cursor = conexion.cursor()
             cursor.callproc('EditarRolVendedor', [dni, rol_nuevo])
             conexion.commit()
-            print(f"Rol actualizado correctamente para el DNI {dni}.")
+            print(f"Rol actualizado correctamente para el dni {dni}.")
     except Exception as e:
         print(f"Error al actualizar el rol: {e}")
     finally:
@@ -202,7 +202,7 @@ def cambiar_estado_asesor(dni, nuevo_estado):
             cursor = conexion.cursor()
             cursor.callproc('CambiarEstadoAsesor', [dni, nuevo_estado])
             conexion.commit()
-            print(f"Estado del asesor con DNI {dni} cambiado a {nuevo_estado}.")
+            print(f"Estado del asesor con dni {dni} cambiado a {nuevo_estado}.")
     except Exception as e:
         print(f"Error al cambiar el estado del asesor: {e}")
     finally:
@@ -217,7 +217,7 @@ def cambiar_estado_vendedor(dni, nuevo_estado):
             cursor = conexion.cursor()
             cursor.callproc('CambiarEstadoVendedor', [dni, nuevo_estado])
             conexion.commit()
-            print(f"Estado del vendedor con DNI {dni} cambiado a {nuevo_estado}.")
+            print(f"Estado del vendedor con dni {dni} cambiado a {nuevo_estado}.")
     except Exception as e:
         print(f"Error al cambiar el estado del vendedor: {e}")
     finally:
