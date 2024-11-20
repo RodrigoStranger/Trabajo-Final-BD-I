@@ -3,7 +3,7 @@ from backend_api import *
 
 def persona_existe(dni):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             query = f"SELECT VerificarPersonaExiste('{dni}') AS Existe;"
@@ -21,7 +21,7 @@ def persona_existe(dni):
 
 def telefono_existe(telefono):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             query = f"SELECT VerificarTelefonoExiste('{telefono}') AS ExisteTelefono;"
@@ -40,7 +40,7 @@ def insertar_cliente(dni, telefono):
     datos = generar_datos_completos(dni)
     if datos:
         try:
-            conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+            conexion = conectar_base_datos()
             if not conexion:
                 print("No se pudo establecer conexión con la base de datos.")
                 return
@@ -67,7 +67,7 @@ def insertar_vendedor(dni, telefono, rol):
     datos = generar_datos_completos(dni)
     if datos:
         try:
-            conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+            conexion = conectar_base_datos()
             if not conexion:
                 print("No se pudo establecer conexión con la base de datos.")
                 return
@@ -94,7 +94,7 @@ def insertar_asesor(dni, telefono, experiencia, especialidad):
     datos = generar_datos_completos(dni)
     if datos:
         try:
-            conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+            conexion = conectar_base_datos()
             if not conexion:
                 print("No se pudo establecer conexión con la base de datos.")
                 return
@@ -122,7 +122,7 @@ def insertar_asesor(dni, telefono, experiencia, especialidad):
 
 def editar_telefono(dni, telefono_nuevo):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('EditarTelefono', [dni, telefono_nuevo])
@@ -137,7 +137,7 @@ def editar_telefono(dni, telefono_nuevo):
 
 def editar_direccion(dni, direccion_nueva):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('EditarDireccion', [dni, direccion_nueva])
@@ -152,7 +152,7 @@ def editar_direccion(dni, direccion_nueva):
 
 def editar_especialidad_asesor(dni, especialidad_nueva):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('EditarEspecialidadAsesor', [dni, especialidad_nueva])
@@ -167,7 +167,7 @@ def editar_especialidad_asesor(dni, especialidad_nueva):
 
 def editar_experiencia_asesor(dni, experiencia_nueva):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('EditarExperienciaAsesor', [dni, experiencia_nueva])
@@ -182,7 +182,7 @@ def editar_experiencia_asesor(dni, experiencia_nueva):
 
 def editar_rol_vendedor(dni, rol_nuevo):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('EditarRolVendedor', [dni, rol_nuevo])
@@ -197,7 +197,7 @@ def editar_rol_vendedor(dni, rol_nuevo):
 
 def cambiar_estado_asesor(dni, nuevo_estado):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('CambiarEstadoAsesor', [dni, nuevo_estado])
@@ -212,7 +212,7 @@ def cambiar_estado_asesor(dni, nuevo_estado):
 
 def cambiar_estado_vendedor(dni, nuevo_estado):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('CambiarEstadoVendedor', [dni, nuevo_estado])

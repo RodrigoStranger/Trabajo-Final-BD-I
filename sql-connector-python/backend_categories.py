@@ -3,7 +3,7 @@ from tabulate import tabulate # pip install tabulate
 
 def mostrar_categorias():
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if not conexion:
             print("No se pudo conectar a la base de datos.")
             return
@@ -23,7 +23,7 @@ def mostrar_categorias():
 
 def agregar_categoria(nombre, descripcion):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('AgregarCategoria', [nombre, descripcion])
@@ -38,7 +38,7 @@ def agregar_categoria(nombre, descripcion):
 
 def editar_nombre_categoria(cod_categoria, nuevo_nombre):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('EditarNombreCategoria', [cod_categoria, nuevo_nombre])
@@ -53,7 +53,7 @@ def editar_nombre_categoria(cod_categoria, nuevo_nombre):
 
 def editar_descripcion_categoria(cod_categoria, nueva_descripcion):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('EditarDescripcionCategoria', [cod_categoria, nueva_descripcion])
@@ -68,7 +68,7 @@ def editar_descripcion_categoria(cod_categoria, nueva_descripcion):
 
 def eliminar_categoria(cod_categoria):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('EliminarCategoria', [cod_categoria])

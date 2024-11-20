@@ -3,7 +3,7 @@ from tabulate import tabulate # pip install tabulate
 
 def mostrar_proveedores():
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if not conexion:
             print("No se pudo conectar a la base de datos.")
             return
@@ -23,7 +23,7 @@ def mostrar_proveedores():
 
 def telefono_existe_proveedores(telefono):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             query = f"SELECT VerificarTelefonoExisteProveedores('{telefono}') AS ExisteTelefono;"
@@ -40,12 +40,12 @@ def telefono_existe_proveedores(telefono):
 
 def agregar_proveedor(ruc, nombre, telefono):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('AgregarProveedor', [ruc, nombre, telefono])
             conexion.commit()
-            print(f"Proveedor {nombre} con RUC {ruc} creado exitosamente.")
+            print(f"Proveedor {nombre} con ruc {ruc} creado exitosamente.")
     except Error as e:
         print(f"Error al agregar el proveedor: {e}")
     finally:
@@ -55,12 +55,12 @@ def agregar_proveedor(ruc, nombre, telefono):
 
 def editar_telefono_proveedor(ruc, nuevo_telefono):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('EditarTelefonoProveedor', [ruc, nuevo_telefono])
             conexion.commit()
-            print(f"Teléfono del proveedor con RUC {ruc} actualizado correctamente.")
+            print(f"Teléfono del proveedor con ruc {ruc} actualizado correctamente.")
     except Error as e:
         print(f"Error al actualizar el teléfono del proveedor: {e}")
     finally:
@@ -70,12 +70,12 @@ def editar_telefono_proveedor(ruc, nuevo_telefono):
 
 def eliminar_proveedor(ruc):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('EliminarProveedor', [ruc])
             conexion.commit()
-            print(f"Proveedor con RUC {ruc} eliminado correctamente.")
+            print(f"Proveedor con ruc {ruc} eliminado correctamente.")
     except Error as e:
         print(f"Error al eliminar el proveedor: {e}")
     finally:

@@ -2,7 +2,7 @@ from backend_general import *
 
 def agregar_contrato(dni, fecha_inicio, fecha_fin, salario_mensual, observaciones):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('AgregarContrato', [dni, fecha_inicio, fecha_fin, salario_mensual, observaciones])
@@ -17,7 +17,7 @@ def agregar_contrato(dni, fecha_inicio, fecha_fin, salario_mensual, observacione
 
 def editar_contrato_sueldo(dni, nuevo_sueldo):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('EditarContratoSueldo', [dni, nuevo_sueldo])
@@ -32,7 +32,7 @@ def editar_contrato_sueldo(dni, nuevo_sueldo):
 
 def editar_contrato_fechas(dni, nueva_fecha_inicio, nueva_fecha_fin):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('EditarContratoFechas', [dni, nueva_fecha_inicio, nueva_fecha_fin])
@@ -47,7 +47,7 @@ def editar_contrato_fechas(dni, nueva_fecha_inicio, nueva_fecha_fin):
 
 def editar_contrato_observacion(dni, nueva_observacion):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('EditarContratoObservacion', [dni, nueva_observacion])
@@ -62,7 +62,7 @@ def editar_contrato_observacion(dni, nueva_observacion):
 
 def cambiar_estado_contrato(dni, nuevo_estado):
     try:
-        conexion = conectar_base_datos("localhost", "FabiaNatura", "rodrigo", "ubnt")
+        conexion = conectar_base_datos()
         if conexion.is_connected():
             cursor = conexion.cursor()
             cursor.callproc('CambiarEstadoContrato', [dni, nuevo_estado])
