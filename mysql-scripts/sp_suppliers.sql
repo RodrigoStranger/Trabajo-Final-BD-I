@@ -5,7 +5,7 @@ USE FabiaNatura;
 -- Creación de un proveedor
 DELIMITER $$
 CREATE PROCEDURE AgregarProveedor(
-    IN p_ruc VARCHAR(15),
+    IN p_ruc VARCHAR(11),
     IN p_nombre VARCHAR(50),
     IN p_telefono VARCHAR(15)
 )
@@ -39,7 +39,7 @@ DELIMITER ;
 -- Modificar el telefono de un proveedor
 DELIMITER $$
 CREATE PROCEDURE EditarTelefonoProveedor(
-    IN p_ruc VARCHAR(15),
+    IN p_ruc VARCHAR(11),
     IN p_nuevo_telefono VARCHAR(15)
 )
 BEGIN
@@ -55,7 +55,7 @@ DELIMITER ;
 -- Eliminar un proveedor
 DELIMITER $$
 CREATE PROCEDURE EliminarProveedor(
-    IN p_ruc VARCHAR(15)
+    IN p_ruc VARCHAR(11)
 )
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM Proveedores WHERE ruc = p_ruc) THEN

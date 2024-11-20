@@ -71,14 +71,14 @@ CREATE TABLE Contratos (
 
 -- Proveedores
 CREATE TABLE Proveedores (
-    ruc VARCHAR(15) NOT NULL PRIMARY KEY,
+    ruc VARCHAR(11) NOT NULL PRIMARY KEY,
     nombre VARCHAR(50) UNIQUE NOT NULL,
     fecha_registro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Teléfonos de Proveedores
 CREATE TABLE Telefonos_Proveedores (
-    ruc VARCHAR(15) NOT NULL,
+    ruc VARCHAR(11) NOT NULL,
     telefono VARCHAR(15) NOT NULL PRIMARY KEY,
     FOREIGN KEY (ruc) REFERENCES Proveedores(ruc) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -95,7 +95,7 @@ CREATE TABLE Categorias (
 CREATE TABLE Productos (
     cod_producto INT AUTO_INCREMENT PRIMARY KEY,
     cod_categoria INT,
-    ruc VARCHAR(15),
+    ruc VARCHAR(11),
     nombre VARCHAR(100) UNIQUE NOT NULL,
     linea VARCHAR(100),
     descripcion TEXT,
