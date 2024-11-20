@@ -4,7 +4,7 @@ from fronted_categories import menu_gestion_categorias
 from fronted_suppliers import menu_gestion_proveedores
 
 if __name__ == "__main__":
-    #menu_gestion_personal 
+    menu_gestion_personal() 
     #menu_gestion_contratos()
     #menu_gestion_categorias()
-    menu_gestion_proveedores()
+    #menu_gestion_proveedores()
