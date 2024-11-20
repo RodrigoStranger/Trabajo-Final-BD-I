@@ -13,5 +13,3 @@ BEGIN
     RETURN IF(existe > 0, 1, 0);
 END$$
 DELIMITER ;
-
--- 
