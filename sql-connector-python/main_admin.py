@@ -8,3 +8,6 @@ if __name__ == "__main__":
     #menu_gestion_contratos()
     #menu_gestion_categorias()
     #menu_gestion_proveedores()
+
+# productos
+# vender -> crear una factura -> crear los detalles de factura
