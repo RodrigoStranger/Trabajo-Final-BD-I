@@ -11,7 +11,7 @@ def menu_gestion_categorias():
         print("2. Editar una categoría")
         print("3. Eliminar una categoría")
         print("4. Observar estadísticas generales")
-        print("5. Salir")
+        print("5. Salir al menú principal")
         opcion = input("Seleccione una opción: ")
         if opcion == "1":
             agregar_categoria_menu()

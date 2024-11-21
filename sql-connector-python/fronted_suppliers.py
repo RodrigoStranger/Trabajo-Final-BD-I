@@ -11,7 +11,7 @@ def menu_gestion_proveedores():
         print("2. Editar el teléfono de un proveedor")
         print("3. Eliminar un proveedor")
         print("4. Observar estadísticas generales")
-        print("5. Salir")
+        print("5. Salir al menú principal")
         opcion = input("Seleccione una opción: ")
         if opcion == "1":
             agregar_proveedor_menu()

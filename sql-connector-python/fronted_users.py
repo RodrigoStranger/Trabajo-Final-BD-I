@@ -9,7 +9,7 @@ def menu_gestion_personal():
         print("=== Gestión de Personal ===")
         print("1. Gestión de Vendedores")
         print("2. Gestión de Asesores")
-        print("3. Salir")
+        print("3. Salir al menú principal")
         opcion = input("Seleccione una opción: ")
         if opcion == "1":
             menu_gestion_vendedores()

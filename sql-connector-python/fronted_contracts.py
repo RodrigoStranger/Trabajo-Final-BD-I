@@ -13,7 +13,7 @@ def menu_gestion_contratos():
         print("2. Editar un contrato")
         print("3. Inhabilitar o habilitar un contrato")
         print("4. Observar estadísticas generales")
-        print("5. Salir")
+        print("5. Salir al menú principal")
         opcion = input("Seleccione una opción: ")
         if opcion == "1":
             agregar_contrato_menu()
