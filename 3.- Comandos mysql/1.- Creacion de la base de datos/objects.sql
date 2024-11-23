@@ -1,3 +1,4 @@
+CREATE DATABASE IF NOT EXISTS FabiaNatura;
 USE FabiaNatura;
 
 -- Tabla de Personas
