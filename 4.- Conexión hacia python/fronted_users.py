@@ -81,9 +81,9 @@ def agregar_vendedor_menu():
 def editar_vendedor_menu():
     limpiar_pantalla()
     print("=== Editar a un Vendedor ===")
+    print("Vendedores disponibles:")
+    mostrar_vendedores()
     while True:
-        print("Vendedores disponibles:")
-        mostrar_vendedores()
         dni = input("Ingrese el DNI del vendedor: ")
         if len(dni) == 8 and dni.isdigit():
             if persona_existe(dni):
