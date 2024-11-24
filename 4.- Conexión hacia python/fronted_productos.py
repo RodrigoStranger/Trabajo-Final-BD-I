@@ -5,9 +5,31 @@ from backend_categories import mostrar_categorias
 
 def limpiar_pantalla(): os.system('cls' if os.name == 'nt' else 'clear')
 
-
-## falta agregar lo del menu y cosas xd
-
+def menu_gestion_productos():
+    while True:
+        limpiar_pantalla()
+        print("=== Gestión de Producto===")
+        print("1. Agregar un producto")
+        print("2. Editar un producto")
+        print("3. Cambiar el estado de un producto")
+        print("4. Observar estadísticas generales")
+        print("5. Salir al menú principal")
+        opcion = input("Seleccione una opción: ")
+        if opcion == "1":
+            agregar_producto_menu()
+        elif opcion == "2":
+            menu_editar_producto()
+        elif opcion == "3":
+            menu_cambiar_estado_producto()
+        elif opcion == "4":
+            print("Función pendiente de desarrollo. Presione Enter para continuar...")
+            input()
+        elif opcion == "5":
+            print("Saliendo del menú de Gestión de Proveedores...")
+            break
+        else:
+            print("Opción no válida. Intente nuevamente.")
+            input("Presione Enter para continuar...")
 
 def agregar_producto_menu():
     limpiar_pantalla()
@@ -77,3 +99,115 @@ def agregar_producto_menu():
             print("Debe ingresar un número válido para el stock. Intente nuevamente.")
     agregar_producto(cod_categoria, ruc, nombre, linea, descripcion, precio_compra, precio_venta, stock)
     input("Presione Enter para continuar...")
+
+def menu_cambiar_estado_producto():
+    while True:
+        limpiar_pantalla()
+        print("=== Cambiar Estado de Productos ===")
+        busqueda = input("Ingrese el nombre o parte del nombre del producto: ").strip()
+        if not busqueda:
+            print("Debe ingresar un criterio de búsqueda.")
+            input("Presione Enter para continuar...")
+            continue
+        buscar_productos(busqueda)
+        try:
+            cod_producto = int(input("Ingrese el código del producto que desea cambiar de estado: "))
+        except ValueError:
+            print("Debe ingresar un código de producto válido.")
+            input("Presione Enter para continuar...")
+            continue
+        while True:
+            limpiar_pantalla()
+            print(f"=== Cambiar Estado del Producto {cod_producto} ===")
+            print("1. Marcar como disponible")
+            print("2. Marcar como agotado")
+            print("3. Salir al menú anterior")
+            opcion = input("Seleccione una opción: ")
+            if opcion == "1":
+                while True:
+                    try:
+                        stock = int(input("Ingrese el nuevo stock: "))
+                        if stock > 0:
+                            cambiar_estado_producto(cod_producto, 'disponible', stock)
+                            break
+                        else:
+                            print("El stock debe ser mayor a 0 para marcar como disponible. Intente nuevamente.")
+                    except ValueError:
+                        print("Debe ingresar un número válido para el stock.")
+            elif opcion == "2":
+                cambiar_estado_producto(cod_producto, 'agotado', 0)
+                break
+            elif opcion == "3":
+                break
+            else:
+                print("Opción no válida. Intente nuevamente.")
+            input("Presione Enter para continuar...")
+        break
+
+def menu_editar_producto():
+    while True:
+        limpiar_pantalla()
+        print("=== Edición de Productos ===")
+        print("Primero debe seleccionar el producto que desea editar.")
+        busqueda = input("Ingrese el nombre o parte del nombre del producto: ").strip()
+        if not busqueda:
+            print("Debe ingresar un criterio de búsqueda.")
+            input("Presione Enter para continuar...")
+            continue
+        buscar_productos(busqueda)
+        try:
+            cod_producto = int(input("Ingrese el código del producto que desea editar: "))
+        except ValueError:
+            print("Debe ingresar un código de producto válido.")
+            input("Presione Enter para continuar...")
+            continue
+        while True:
+            limpiar_pantalla()
+            print(f"=== Edición del Producto {cod_producto} ===")
+            print("1. Editar precio de compra")
+            print("2. Editar precio de venta")
+            print("3. Editar descripción")
+            print("4. Editar línea")
+            print("5. Editar stock")
+            print("6. Salir al menú principal")
+            opcion = input("Seleccione una opción: ")
+            if opcion == "1":
+                try:
+                    precio_compra = float(input("Ingrese el nuevo precio de compra (mayor a 0): "))
+                    if precio_compra > 0:
+                        editar_precio_compra_producto(cod_producto, precio_compra)
+                    else:
+                        print("El precio de compra debe ser mayor a 0.")
+                except ValueError:
+                    print("Debe ingresar un número válido para el precio de compra.")
+            elif opcion == "2":
+                try:
+                    precio_venta = float(input("Ingrese el nuevo precio de venta (mayor a 0): "))
+                    if precio_venta > 0:
+                        editar_precio_venta_producto(cod_producto, precio_venta)
+                    else:
+                        print("El precio de venta debe ser mayor a 0.")
+                except ValueError:
+                    print("Debe ingresar un número válido para el precio de venta.")
+            elif opcion == "3":
+                descripcion = input("Ingrese la nueva descripción (puede dejarse en blanco): ").strip()
+                editar_descripcion_producto(cod_producto, descripcion)
+            elif opcion == "4":
+                linea = input("Ingrese la nueva línea (puede dejarse en blanco): ").strip()
+                editar_linea_producto(cod_producto, linea)
+            elif opcion == "5":
+                while True:
+                    try:
+                        stock = int(input("Ingrese el nuevo stock (debe ser mayor o igual a 0): "))
+                        if stock >= 0:
+                            editar_stock_producto(cod_producto, stock)
+                            break
+                        else:
+                            print("El stock no puede ser negativo. Intente nuevamente.")
+                    except ValueError:
+                        print("Debe ingresar un número válido para el stock.")
+            elif opcion == "6":
+                break
+            else:
+                print("Opción no válida. Intente nuevamente.")
+            input("Presione Enter para continuar...")
