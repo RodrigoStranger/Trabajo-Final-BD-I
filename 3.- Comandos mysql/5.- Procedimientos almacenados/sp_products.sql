@@ -136,6 +136,48 @@ BEGIN
 END$$
 DELIMITER ;
 
+-- CAMBIAR DE PROVEEDOR:
+DELIMITER $$
+CREATE PROCEDURE EditarProveedorProducto(
+    IN p_cod_producto INT,
+    IN p_ruc VARCHAR(11)
+)
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM Productos WHERE cod_producto = p_cod_producto) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El producto con el código proporcionado no existe.';
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM Proveedores WHERE ruc = p_ruc) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El proveedor con el RUC proporcionado no existe.';
+    END IF;
+    UPDATE Productos
+    SET ruc = p_ruc
+    WHERE cod_producto = p_cod_producto;
+END$$
+DELIMITER ;
+
+-- CAMBIAR DE CATEGORIA:
+DELIMITER $$
+CREATE PROCEDURE EditarCategoriaProducto(
+    IN p_cod_producto INT,
+    IN p_cod_categoria INT
+)
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM Productos WHERE cod_producto = p_cod_producto) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El producto con el código proporcionado no existe.';
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM Categorias WHERE cod_categoria = p_cod_categoria) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'La categoría con el código proporcionado no existe.';
+    END IF;
+    UPDATE Productos
+    SET cod_categoria = p_cod_categoria
+    WHERE cod_producto = p_cod_producto;
+END$$
+DELIMITER ;
+
 -- CAMBIAR ESTADO:
 -- si queremos cambiar de disponible a agotado, debemos pasar el stock como 0
 -- si queremos cambiar de agotado a disponible, debemos pasar algun tipo de stock mayor a 0
@@ -178,23 +220,16 @@ CREATE PROCEDURE BuscarProductos(
     IN p_busqueda VARCHAR(100)
 )
 BEGIN
-    IF EXISTS (
-        SELECT 1
-        FROM Productos
-        WHERE nombre LIKE CONCAT('%', p_busqueda, '%')
-    ) THEN
-        SELECT 
-            p.cod_producto AS Codigo,
-            p.nombre AS Nombre,
-            pr.nombre AS Proveedor,
-            p.stock AS Stock,
-            p.precio_venta AS PrecioUnitario
-        FROM Productos p
-        LEFT JOIN Proveedores pr ON p.ruc = pr.ruc
-        WHERE p.nombre LIKE CONCAT('%', p_busqueda, '%')
-        ORDER BY p.cod_producto;
-    ELSE
-        SELECT 'No se encontraron productos que coincidan con la búsqueda.' AS Mensaje;
-    END IF;
+    SELECT 
+        p.cod_producto AS Codigo,
+        p.nombre AS Nombre,
+        pr.nombre AS Proveedor,
+        p.stock AS Stock,
+        p.precio_venta AS PrecioUnitario,
+        p.estado AS Estado
+    FROM Productos p
+    LEFT JOIN Proveedores pr ON p.ruc = pr.ruc
+    WHERE p.nombre LIKE CONCAT('%', p_busqueda, '%')
+    ORDER BY p.cod_producto;
 END$$
 DELIMITER ;

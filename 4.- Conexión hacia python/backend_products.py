@@ -9,11 +9,12 @@ def buscar_productos(busqueda):
             return
         cursor = conexion.cursor()
         cursor.callproc('BuscarProductos', [busqueda])
-        resultados = cursor.fetchall()
+        for resultado in cursor.stored_results():
+            resultados = resultado.fetchall()
         if resultados:
-            headers = ["Codigo", "Nombre", "Proveedor", "Stock", "PrecioUnitario"]
+            from tabulate import tabulate
+            headers = ["Codigo", "Nombre", "Proveedor", "Stock", "PrecioUnitario", "Estado"]
             print(tabulate(resultados, headers=headers, tablefmt="grid"))
-            return resultados
         else:
             print("No se encontraron productos que coincidan con la búsqueda.")
     except Exception as e:
@@ -145,3 +146,36 @@ def cambiar_estado_producto(cod_producto, estado, stock):
             cursor.close()
             conexion.close()
 
+def editar_proveedor_producto(cod_producto, ruc):
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        cursor.callproc('EditarProveedorProducto', [cod_producto, ruc])
+        conexion.commit()
+        print(f"El proveedor del producto {cod_producto} se actualizó correctamente al RUC {ruc}.")
+    except Exception as e:
+        print(f"Error al cambiar el proveedor del producto: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def editar_categoria_producto(cod_producto, cod_categoria):
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        cursor.callproc('EditarCategoriaProducto', [cod_producto, cod_categoria])
+        conexion.commit()
+        print(f"La categoría del producto {cod_producto} se actualizó correctamente al código {cod_categoria}.")
+    except Exception as e:
+        print(f"Error al cambiar la categoría del producto: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
