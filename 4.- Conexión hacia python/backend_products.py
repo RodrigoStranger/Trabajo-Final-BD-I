@@ -11,9 +11,9 @@ def buscar_productos(busqueda):
         cursor.callproc('BuscarProductos', [busqueda])
         resultados = cursor.fetchall()
         if resultados:
-            from tabulate import tabulate
             headers = ["Codigo", "Nombre", "Proveedor", "Stock", "PrecioUnitario"]
             print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            return resultados
         else:
             print("No se encontraron productos que coincidan con la búsqueda.")
     except Exception as e:

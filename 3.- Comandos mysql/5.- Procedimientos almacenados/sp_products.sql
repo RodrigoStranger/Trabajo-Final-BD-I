@@ -178,13 +178,11 @@ CREATE PROCEDURE BuscarProductos(
     IN p_busqueda VARCHAR(100)
 )
 BEGIN
-    DECLARE total_resultados INT;
-    SELECT COUNT(*) INTO total_resultados
-    FROM Productos
-    WHERE nombre LIKE CONCAT('%', p_busqueda, '%');
-    IF total_resultados = 0 THEN
-        SELECT 'No se encontraron productos que coincidan con la búsqueda.' AS Mensaje;
-    ELSE
+    IF EXISTS (
+        SELECT 1
+        FROM Productos
+        WHERE nombre LIKE CONCAT('%', p_busqueda, '%')
+    ) THEN
         SELECT 
             p.cod_producto AS Codigo,
             p.nombre AS Nombre,
@@ -195,6 +193,8 @@ BEGIN
         LEFT JOIN Proveedores pr ON p.ruc = pr.ruc
         WHERE p.nombre LIKE CONCAT('%', p_busqueda, '%')
         ORDER BY p.cod_producto;
+    ELSE
+        SELECT 'No se encontraron productos que coincidan con la búsqueda.' AS Mensaje;
     END IF;
 END$$
 DELIMITER ;
