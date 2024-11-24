@@ -13,7 +13,7 @@ def menu_admin():
         print("     === FabiaNatura ===")
         print("=== Administración General ===")
         print("1. Gestión de Ventas")
-        print("2. Gestión del Personal")
+        print("2. Gestión de Personal")
         print("3. Gestión de Contratos")
         print("4. Gestión de Categorias")
         print("5. Gestión de Proveedores")
