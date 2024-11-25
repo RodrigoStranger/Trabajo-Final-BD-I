@@ -77,3 +77,87 @@ ORDER BY
     a.cod_asesor ASC;
 
 -- SELECT * FROM MostrarAsesores;
+
+-- mostrar los vendedores con más ventas
+CREATE VIEW MostrarTopVendedores AS
+SELECT 
+    v.cod_vendedor AS Codigo,
+    CONCAT(p.nombre, ' ', p.apellido_paterno, ' ', p.apellido_materno) AS Vendedor,
+    COUNT(f.cod_factura) AS TotalVentas,
+    FORMAT(SUM(df.cantidad * pr.precio_venta), 2) AS TotalIngresosGenerados
+FROM 
+    Vendedores v
+INNER JOIN 
+    Empleados e ON v.cod_empleado = e.cod_empleado
+INNER JOIN 
+    Personas p ON e.dni = p.dni
+INNER JOIN 
+    Facturas f ON v.cod_vendedor = f.cod_vendedor
+INNER JOIN 
+    Detalle_Facturas df ON f.cod_factura = df.cod_factura
+INNER JOIN 
+    Productos pr ON df.cod_producto = pr.cod_producto
+GROUP BY 
+    v.cod_vendedor, p.nombre, p.apellido_paterno, p.apellido_materno
+ORDER BY 
+    SUM(df.cantidad * pr.precio_venta) DESC;
+
+-- MostrarVendedoresConMenosVentas
+CREATE VIEW MostrarVendedoresConMenosVentas AS
+SELECT 
+    v.cod_vendedor AS CodigoVendedor,
+    CONCAT(p.nombre, ' ', p.apellido_paterno, ' ', p.apellido_materno) AS NombreVendedor,
+    COUNT(f.cod_factura) AS TotalFacturas
+FROM 
+    Vendedores v
+INNER JOIN 
+    Empleados e ON v.cod_empleado = e.cod_empleado
+INNER JOIN 
+    Personas p ON e.dni = p.dni
+LEFT JOIN 
+    Facturas f ON v.cod_vendedor = f.cod_vendedor
+GROUP BY 
+    v.cod_vendedor, NombreVendedor
+ORDER BY 
+    TotalFacturas ASC;
+
+CREATE VIEW MostrarProductosMasVendidosPorVendedor AS
+SELECT 
+    v.cod_vendedor AS CodigoVendedor,
+    CONCAT(p.nombre, ' ', p.apellido_paterno, ' ', p.apellido_materno) AS NombreVendedor,
+    pr.nombre AS ProductoMasVendido,
+    SUM(df.cantidad) AS UnidadesVendidas
+FROM 
+    Vendedores v
+INNER JOIN 
+    Empleados e ON v.cod_empleado = e.cod_empleado
+INNER JOIN 
+    Personas p ON e.dni = p.dni
+INNER JOIN 
+    Facturas f ON v.cod_vendedor = f.cod_vendedor
+INNER JOIN 
+    Detalle_Facturas df ON f.cod_factura = df.cod_factura
+INNER JOIN 
+    Productos pr ON df.cod_producto = pr.cod_producto
+GROUP BY 
+    v.cod_vendedor, NombreVendedor, pr.nombre
+ORDER BY 
+    v.cod_vendedor, UnidadesVendidas DESC;
+
+CREATE VIEW MostrarClientesAtendidosPorVendedor AS
+SELECT 
+    v.cod_vendedor AS CodigoVendedor,
+    CONCAT(p.nombre, ' ', p.apellido_paterno, ' ', p.apellido_materno) AS NombreVendedor,
+    COUNT(DISTINCT f.dni) AS ClientesUnicos
+FROM 
+    Vendedores v
+INNER JOIN 
+    Empleados e ON v.cod_empleado = e.cod_empleado
+INNER JOIN 
+    Personas p ON e.dni = p.dni
+INNER JOIN 
+    Facturas f ON v.cod_vendedor = f.cod_vendedor
+GROUP BY 
+    v.cod_vendedor, NombreVendedor
+ORDER BY 
+    ClientesUnicos DESC;

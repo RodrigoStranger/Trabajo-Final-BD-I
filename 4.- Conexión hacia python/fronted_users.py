@@ -40,9 +40,7 @@ def menu_gestion_vendedores():
         elif opcion == "3":
             estado_vendedor_menu()
         elif opcion == "4":
-            #estadisticas_vendedor()
-            print("Función pendiente de desarrollo. Presione Enter para continuar...")
-            input()
+            menu_estadisticas_vendedores()
         elif opcion == "5":
             print("Volviendo a la Gestión principal...")
             input("Presione Enter para continuar...")
@@ -324,3 +322,27 @@ def estado_asesor_menu():
         else:
             print("Opción inválida. Intente nuevamente.")
     input("Presione Enter para continuar...")
+
+def menu_estadisticas_vendedores():
+    while True:
+        limpiar_pantalla()
+        print("=== Estadísticas de Vendedores ===")
+        print("1. Mostrar los vendedores con más ventas")
+        print("2. Mostrar los vendedores con menos ventas")
+        print("3. Mostrar los productos más vendidos por cada vendedor")
+        print("4. Mostrar la cantidad de clientes atendidos por cada vendedor")
+        print("5. Salir a la Gestión de Vendedores")
+        opcion = input("Seleccione una opción: ")
+        if opcion == "1":
+            mostrar_top_vendedores()
+        elif opcion == "2":
+            mostrar_vendedores_con_menos_ventas()
+        elif opcion == "3":
+            mostrar_productos_mas_vendidos_por_vendedor()
+        elif opcion == "4":
+            mostrar_clientes_atendidos_por_vendedor()
+        elif opcion == "5":
+            break
+        else:
+            print("Opción no válida. Intente nuevamente.")
+        input("Presione Enter para continuar...")

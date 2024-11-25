@@ -182,5 +182,3 @@ BEGIN
     UPDATE Contratos SET estado = p_nuevo_estado WHERE cod_empleado = empleado_id;
 END$$
 DELIMITER ;
-
--- MOSTRAR:

@@ -295,3 +295,95 @@ def cambiar_estado_vendedor(dni, nuevo_estado):
         if conexion.is_connected():
             cursor.close()
             conexion.close()
+
+def mostrar_top_vendedores():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarTopVendedores;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            from tabulate import tabulate
+            headers = ["Codigo", "Vendedor", "Total Ventas", "Total Ingresos Generados"]
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No hay datos disponibles en la vista de vendedores con más ventas.")
+    except Exception as e:
+        print(f"Error al consultar los vendedores con más ventas: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_vendedores_con_menos_ventas():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarVendedoresConMenosVentas;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            from tabulate import tabulate
+            headers = ["Codigo Vendedor", "Nombre Vendedor", "Total Facturas"]
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No hay datos disponibles en la vista de vendedores con menos ventas.")
+    except Exception as e:
+        print(f"Error al consultar los vendedores con menos ventas: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_productos_mas_vendidos_por_vendedor():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarProductosMasVendidosPorVendedor;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            from tabulate import tabulate
+            headers = ["Codigo Vendedor", "Nombre Vendedor", "Producto Más Vendido", "Unidades Vendidas"]
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No hay datos disponibles en la vista de productos más vendidos por cada vendedor.")
+    except Exception as e:
+        print(f"Error al consultar los productos más vendidos por cada vendedor: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_clientes_atendidos_por_vendedor():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarClientesAtendidosPorVendedor;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            from tabulate import tabulate
+            headers = ["Codigo Vendedor", "Nombre Vendedor", "Clientes Únicos"]
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No hay datos disponibles en la vista de clientes atendidos por cada vendedor.")
+    except Exception as e:
+        print(f"Error al consultar los clientes atendidos por cada vendedor: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
