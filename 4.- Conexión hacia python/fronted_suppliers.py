@@ -20,8 +20,7 @@ def menu_gestion_proveedores():
         elif opcion == "3":
             eliminar_proveedor_menu()
         elif opcion == "4":
-            print("Función pendiente de desarrollo. Presione Enter para continuar...")
-            input()
+            menu_estadisticas_proveedores()
         elif opcion == "5":
             print("Saliendo del menú de Gestión de Proveedores...")
             break
@@ -96,3 +95,27 @@ def eliminar_proveedor_menu():
     else:
         print("Operación cancelada.")
     input("Presione Enter para continuar...")
+
+def menu_estadisticas_proveedores():
+    while True:
+        limpiar_pantalla()
+        print("=== Estadísticas de Proveedores ===")
+        print("1. Mostrar proveedores con mayor contribución al inventario")
+        print("2. Mostrar proveedores con mayor valor de productos")
+        print("3. Mostrar proveedores con productos más vendidos")
+        print("4. Mostrar promedio de productos por proveedor")
+        print("5. Regresar a la Gestión de proveedores")
+        opcion = input("Seleccione una opción: ")
+        if opcion == "1":
+            mostrar_proveedores_mayor_contribucion()
+        elif opcion == "2":
+            mostrar_proveedores_mayor_valor()
+        elif opcion == "3":
+            mostrar_proveedores_productos_mas_vendidos()
+        elif opcion == "4":
+            mostrar_promedio_productos_por_proveedor()
+        elif opcion == "5":
+            break
+        else:
+            print("Opción no válida. Intente nuevamente.")
+        input("Presione Enter para continuar...")

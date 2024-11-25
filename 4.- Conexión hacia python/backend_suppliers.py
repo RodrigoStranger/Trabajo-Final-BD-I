@@ -82,3 +82,93 @@ def eliminar_proveedor(ruc):
         if conexion.is_connected():
             cursor.close()
             conexion.close()
+
+def mostrar_proveedores_mayor_contribucion():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarProveedoresMayorContribucion;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            from tabulate import tabulate
+            headers = ["RUC", "NombreProveedor", "TotalStockContribuido"]
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No hay datos disponibles.")
+    except Exception as e:
+        print(f"Error al consultar los datos: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_proveedores_mayor_valor():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarProveedoresMayorValor;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            from tabulate import tabulate
+            headers = ["RUC", "NombreProveedor", "ValorTotalProductos"]
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No hay datos disponibles.")
+    except Exception as e:
+        print(f"Error al consultar los datos: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_proveedores_productos_mas_vendidos():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarProveedoresProductosMasVendidos;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            from tabulate import tabulate
+            headers = ["RUC", "NombreProveedor", "ProductoMasVendido", "UnidadesVendidas"]
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No hay datos disponibles.")
+    except Exception as e:
+        print(f"Error al consultar los datos: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_promedio_productos_por_proveedor():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarPromedioProductosPorProveedor;"
+        cursor.execute(query)
+        resultados = cursor.fetchone()
+        if resultados:
+            print(f"El promedio de productos por proveedor es: {resultados[0]:.2f}")
+        else:
+            print("No hay datos disponibles.")
+    except Exception as e:
+        print(f"Error al consultar los datos: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
