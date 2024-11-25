@@ -80,3 +80,83 @@ def eliminar_categoria(cod_categoria):
         if conexion.is_connected():
             cursor.close()
             conexion.close()
+
+def mostrar_categorias_con_mas_productos():
+    try:
+        conexion = conectar_base_datos()
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarCategoriasConMasProductos;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        headers = ["CodigoCategoria", "NombreCategoria", "TotalProductos"]
+        print(tabulate(resultados, headers=headers, tablefmt="grid"))
+    except Exception as e:
+        print(f"Error al consultar las categorías con más productos: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_categorias_con_productos_mas_vendidos():
+    try:
+        conexion = conectar_base_datos()
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarCategoriasConProductosMasVendidos;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        headers = ["CodigoCategoria", "NombreCategoria", "TotalUnidadesVendidas"]
+        print(tabulate(resultados, headers=headers, tablefmt="grid"))
+    except Exception as e:
+        print(f"Error al consultar las categorías con productos más vendidos: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_categorias_con_productos_agotados():
+    try:
+        conexion = conectar_base_datos()
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarCategoriasConProductosAgotados;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        headers = ["CodigoCategoria", "NombreCategoria", "ProductosAgotados"]
+        print(tabulate(resultados, headers=headers, tablefmt="grid"))
+    except Exception as e:
+        print(f"Error al consultar las categorías con productos agotados: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_categorias_con_productos_disponibles():
+    try:
+        conexion = conectar_base_datos()
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarCategoriasConProductosDisponibles;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        headers = ["CodigoCategoria", "NombreCategoria", "ProductosDisponibles"]
+        print(tabulate(resultados, headers=headers, tablefmt="grid"))
+    except Exception as e:
+        print(f"Error al consultar las categorías con productos disponibles: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_categorias_con_mas_ventas_por_cliente():
+    try:
+        conexion = conectar_base_datos()
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarCategoriasConMasVentasPorCliente;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        headers = ["CodigoCategoria", "NombreCategoria", "ClientesUnicos"]
+        print(tabulate(resultados, headers=headers, tablefmt="grid"))
+    except Exception as e:
+        print(f"Error al consultar las categorías con más ventas por cliente: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()

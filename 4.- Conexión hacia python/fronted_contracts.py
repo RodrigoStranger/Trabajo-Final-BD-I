@@ -142,7 +142,6 @@ def menu_estadisticas_contratos():
         print("3. Ver duración promedio de contratos por empleado")
         print("4. Salir al menú principal")
         opcion = input("Seleccione una opción: ")
-
         if opcion == "1":
             mostrar_contratos_por_estado_y_tipo()
         elif opcion == "2":

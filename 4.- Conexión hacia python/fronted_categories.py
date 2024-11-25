@@ -1,6 +1,5 @@
 import os
 from backend_categories import *
-
 def limpiar_pantalla(): os.system('cls' if os.name == 'nt' else 'clear')
 
 def menu_gestion_categorias():
@@ -20,8 +19,7 @@ def menu_gestion_categorias():
         elif opcion == "3":
             eliminar_categoria_menu()
         elif opcion == "4":
-            print("Función pendiente de desarrollo. Presione Enter para continuar...")
-            input()
+            menu_categorias_estadisticas()
         elif opcion == "5":
             print("Saliendo del menú de Gestión de Categorías...")
             break
@@ -102,3 +100,31 @@ def eliminar_categoria_menu():
     else:
         print("Operación cancelada.")
     input("Presione Enter para continuar...")
+
+def menu_categorias_estadisticas():
+    while True:
+        limpiar_pantalla()
+        print("=== Estadísticas de Categorías ===")
+        print("1. Categorías con más productos")
+        print("2. Categorías con productos más vendidos")
+        print("3. Categorías con productos agotados")
+        print("4. Categorías con productos disponibles")
+        print("5. Categorías con más ventas por cliente")
+        print("6. Salir a la Gestión de Categorias")
+        opcion = input("Seleccione una opción: ")
+        if opcion == "1":
+            mostrar_categorias_con_mas_productos()
+        elif opcion == "2":
+            mostrar_categorias_con_productos_mas_vendidos()
+        elif opcion == "3":
+            mostrar_categorias_con_productos_agotados()
+        elif opcion == "4":
+            mostrar_categorias_con_productos_disponibles()
+        elif opcion == "5":
+            mostrar_categorias_con_mas_ventas_por_cliente()
+        elif opcion == "6":
+            print("Saliendo del menú de estadísticas de categorías.")
+            break
+        else:
+            print("Opción no válida. Intente nuevamente.")
+        input("Presione Enter para continuar...")
