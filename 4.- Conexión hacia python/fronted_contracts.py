@@ -22,8 +22,7 @@ def menu_gestion_contratos():
         elif opcion == "3":
             cambiar_estado_contrato_menu()
         elif opcion == "4":
-            print("Función pendiente de desarrollo. Presione Enter para continuar...")
-            input()
+            menu_estadisticas_contratos()
         elif opcion == "5":
             print("Volviendo a la ventana principal...")
             input("Presione Enter para continuar...")
@@ -133,3 +132,26 @@ def cambiar_estado_contrato_menu():
             print("Estado inválido. Solo se permite 'activo' o 'inactivo'. Intente nuevamente.")
     cambiar_estado_contrato(dni, nuevo_estado)
     input("Presione Enter para continuar...")
+
+def menu_estadisticas_contratos():
+    while True:
+        limpiar_pantalla()
+        print("=== Estadísticas de Contratos ===")
+        print("1. Ver contratos por estado y tipo de empleado")
+        print("2. Ver promedio de salarios por estado y tipo")
+        print("3. Ver duración promedio de contratos por empleado")
+        print("4. Salir al menú principal")
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == "1":
+            mostrar_contratos_por_estado_y_tipo()
+        elif opcion == "2":
+            mostrar_promedio_salarios_por_estado_y_tipo()
+        elif opcion == "3":
+            mostrar_duracion_promedio_contratos_por_empleado()
+        elif opcion == "4":
+            print("Regresando al menú principal...")
+            break
+        else:
+            print("Opción no válida. Intente nuevamente.")
+        input("Presione Enter para continuar...")

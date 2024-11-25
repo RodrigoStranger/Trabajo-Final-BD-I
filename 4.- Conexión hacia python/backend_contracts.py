@@ -1,4 +1,5 @@
 from backend_general import *
+from tabulate import tabulate
 
 def agregar_contrato(dni, fecha_inicio, fecha_fin, salario_mensual, observaciones):
     try:
@@ -70,6 +71,72 @@ def cambiar_estado_contrato(dni, nuevo_estado):
             print(f"Estado del contrato actualizado a '{nuevo_estado}' para el empleado con DNI {dni}.")
     except Error as e:
         print(f"Error al cambiar el estado del contrato: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_contratos_por_estado_y_tipo():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarContratosPorEstadoYTipo;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            headers = [desc[0] for desc in cursor.description]  # Obtener nombres de columnas
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No se encontraron resultados en la vista MostrarContratosPorEstadoYTipo.")
+    except Exception as e:
+        print(f"Error al consultar MostrarContratosPorEstadoYTipo: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_promedio_salarios_por_estado_y_tipo():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarPromedioSalariosPorEstadoYTipo;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            headers = [desc[0] for desc in cursor.description]  # Obtener nombres de columnas
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No se encontraron resultados en la vista MostrarPromedioSalariosPorEstadoYTipo.")
+    except Exception as e:
+        print(f"Error al consultar MostrarPromedioSalariosPorEstadoYTipo: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_duracion_promedio_contratos_por_empleado():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarDuracionPromedioContratosPorEmpleado;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            headers = [desc[0] for desc in cursor.description]  # Obtener nombres de columnas
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No se encontraron resultados en la vista MostrarDuracionPromedioContratosPorEmpleado.")
+    except Exception as e:
+        print(f"Error al consultar MostrarDuracionPromedioContratosPorEmpleado: {e}")
     finally:
         if conexion.is_connected():
             cursor.close()
