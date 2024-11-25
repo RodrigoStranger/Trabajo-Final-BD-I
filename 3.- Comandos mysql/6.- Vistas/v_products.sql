@@ -82,20 +82,6 @@ GROUP BY
 ORDER BY 
     TotalVendidos ASC;
 
--- Productos agotados
-CREATE VIEW MostrarProductosAgotados AS
-SELECT 
-    p.cod_producto AS CodigoProducto,
-    p.nombre AS NombreProducto,
-    p.stock AS Stock,
-    p.estado AS Estado
-FROM 
-    Productos p
-WHERE 
-    p.estado = 'agotado'
-ORDER BY 
-    p.cod_producto;
-
 -- Ingresos generados por productos
 CREATE VIEW MostrarIngresosPorProducto AS
 SELECT 
