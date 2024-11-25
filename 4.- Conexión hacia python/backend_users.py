@@ -387,3 +387,91 @@ def mostrar_clientes_atendidos_por_vendedor():
         if conexion.is_connected():
             cursor.close()
             conexion.close()
+
+def mostrar_asesores_con_mas_clientes():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarAsesoresConMasClientes;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            headers = ["CodigoAsesor", "NombreAsesor", "ClientesUnicos"]
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No se encontraron datos.")
+    except Exception as e:
+        print(f"Error al consultar los asesores con más clientes: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_ingresos_generados_por_asesores():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarIngresosGeneradosPorAsesores;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            headers = ["CodigoAsesor", "NombreAsesor", "TotalFacturas", "IngresosTotales"]
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No se encontraron datos.")
+    except Exception as e:
+        print(f"Error al consultar los ingresos generados por asesores: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_productos_mas_recomendados_por_asesores():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarProductosMasRecomendadosPorAsesores;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            headers = ["CodigoAsesor", "NombreAsesor", "Producto", "TotalRecomendaciones"]
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No se encontraron datos.")
+    except Exception as e:
+        print(f"Error al consultar los productos más recomendados por asesores: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_impacto_experiencia_asesores():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarImpactoDeExperienciaEnAsesores;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            headers = ["RangoExperiencia", "CantidadAsesores", "PromedioIngresos", "PromedioClientesAtendidos"]
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No se encontraron datos.")
+    except Exception as e:
+        print(f"Error al consultar el impacto de la experiencia de asesores: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()

@@ -177,9 +177,7 @@ def menu_asesores():
         elif opcion == "3":
             estado_asesor_menu()
         elif opcion == "4":
-            print("Función pendiente de desarrollo. Presione Enter para continuar...")
-            input()
-            #estadisticas_asesor_menu()
+            menu_estadisticas_asesores()
         elif opcion == "5":
             print("Volviendo a la Gestión principal...")
             input("Presione Enter para continuar...")
@@ -342,6 +340,31 @@ def menu_estadisticas_vendedores():
         elif opcion == "4":
             mostrar_clientes_atendidos_por_vendedor()
         elif opcion == "5":
+            break
+        else:
+            print("Opción no válida. Intente nuevamente.")
+        input("Presione Enter para continuar...")
+
+def menu_estadisticas_asesores():
+    while True:
+        limpiar_pantalla()
+        print("=== Gestión de Estadísticas para Asesores ===")
+        print("1. Ver asesores con más clientes atendidos")
+        print("2. Ver ingresos generados por asesores")
+        print("3. Ver productos más recomendados por asesores")
+        print("4. Evaluar el impacto de la experiencia de asesores")
+        print("5. Salir a la Gestión de Asesores")
+        opcion = input("Seleccione una opción: ")
+        if opcion == "1":
+            mostrar_asesores_con_mas_clientes()
+        elif opcion == "2":
+            mostrar_ingresos_generados_por_asesores()
+        elif opcion == "3":
+            mostrar_productos_mas_recomendados_por_asesores()
+        elif opcion == "4":
+            mostrar_impacto_experiencia_asesores()
+        elif opcion == "5":
+            print("Saliendo del menú de estadísticas para asesores...")
             break
         else:
             print("Opción no válida. Intente nuevamente.")
