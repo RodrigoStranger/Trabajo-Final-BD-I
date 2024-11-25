@@ -179,3 +179,162 @@ def editar_categoria_producto(cod_producto, cod_categoria):
         if conexion.is_connected():
             cursor.close()
             conexion.close()
+
+def mostrar_productos_vendidos():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarProductosVendidos;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            headers = [desc[0] for desc in cursor.description]
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No se encontraron productos vendidos.")
+    except Exception as e:
+        print(f"Error al consultar los productos vendidos: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+
+def mostrar_productos_mas_vendidos():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarProductosMasVendidos;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            headers = [desc[0] for desc in cursor.description]
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No se encontraron productos más vendidos.")
+    except Exception as e:
+        print(f"Error al consultar los productos más vendidos: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+
+def mostrar_productos_menos_vendidos():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarProductosMenosVendidos;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            headers = [desc[0] for desc in cursor.description]
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No se encontraron productos menos vendidos.")
+    except Exception as e:
+        print(f"Error al consultar los productos menos vendidos: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+
+def mostrar_productos_agotados():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarProductosAgotados;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            headers = [desc[0] for desc in cursor.description]
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No se encontraron productos agotados.")
+    except Exception as e:
+        print(f"Error al consultar los productos agotados: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+
+def mostrar_ingresos_por_producto():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarIngresosPorProducto;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            headers = [desc[0] for desc in cursor.description]
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No se encontraron ingresos por productos.")
+    except Exception as e:
+        print(f"Error al consultar los ingresos por productos: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+
+def mostrar_productos_mayor_margen_ganancia():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarProductosMayorMargenGanancia;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            headers = [desc[0] for desc in cursor.description]
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No se encontraron productos con mayor margen de ganancia.")
+    except Exception as e:
+        print(f"Error al consultar los productos con mayor margen de ganancia: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def mostrar_productos_disponibles():
+    try:
+        conexion = conectar_base_datos()
+        if not conexion:
+            print("No se pudo conectar a la base de datos.")
+            return
+        cursor = conexion.cursor()
+        query = "SELECT * FROM MostrarProductosDisponibles;"
+        cursor.execute(query)
+        resultados = cursor.fetchall()
+        if resultados:
+            headers = [desc[0] for desc in cursor.description]  # Obtener los nombres de las columnas
+            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        else:
+            print("No se encontraron productos disponibles.")
+    except Exception as e:
+        print(f"Error al consultar los productos disponibles: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()

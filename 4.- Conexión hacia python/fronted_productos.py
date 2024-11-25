@@ -28,8 +28,7 @@ def menu_gestion_productos():
         elif opcion == "5":
             menu_cambiar_categoria_producto()
         elif opcion == "6":
-            print("Función pendiente de desarrollo. Presione Enter para continuar...")
-            input()
+            menu_estadistica_productos()
         elif opcion == "7":
             print("Saliendo del menú de Gestión de Proveedores...")
             break
@@ -358,3 +357,33 @@ def menu_cambiar_categoria_producto():
                     return
             except ValueError:
                 print("Debe ingresar un código válido para la categoría.")
+
+def menu_estadistica_productos():
+    while True:
+        limpiar_pantalla()
+        print("=== Gestión de Productos ===")
+        print("1. Mostrar productos disponibles")
+        print("2. Mostrar productos más vendidos")
+        print("3. Mostrar productos menos vendidos")
+        print("4. Mostrar productos agotados")
+        print("5. Mostrar ingresos generados por productos")
+        print("6. Mostrar productos con mayor margen de ganancia")
+        print("7. Salir a la Gestión de productos")
+        opcion = input("Seleccione una opción: ")
+        if opcion == "1":
+            mostrar_productos_disponibles()
+        elif opcion == "2":
+            mostrar_productos_mas_vendidos()
+        elif opcion == "3":
+            mostrar_productos_menos_vendidos()
+        elif opcion == "4":
+            mostrar_productos_agotados()
+        elif opcion == "5":
+            mostrar_ingresos_por_producto()
+        elif opcion == "6":
+            mostrar_productos_mayor_margen_ganancia()
+        elif opcion == "7":
+            break
+        else:
+            print("Opción no válida. Intente nuevamente.")
+        input("Presione Enter para continuar...")
