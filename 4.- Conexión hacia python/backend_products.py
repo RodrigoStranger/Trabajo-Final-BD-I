@@ -202,7 +202,6 @@ def mostrar_productos_vendidos():
             cursor.close()
             conexion.close()
 
-
 def mostrar_productos_mas_vendidos():
     try:
         conexion = conectar_base_datos()
@@ -224,7 +223,6 @@ def mostrar_productos_mas_vendidos():
         if conexion.is_connected():
             cursor.close()
             conexion.close()
-
 
 def mostrar_productos_menos_vendidos():
     try:
@@ -248,7 +246,6 @@ def mostrar_productos_menos_vendidos():
             cursor.close()
             conexion.close()
 
-
 def mostrar_productos_agotados():
     try:
         conexion = conectar_base_datos()
@@ -271,7 +268,6 @@ def mostrar_productos_agotados():
             cursor.close()
             conexion.close()
 
-
 def mostrar_ingresos_por_producto():
     try:
         conexion = conectar_base_datos()
@@ -293,7 +289,6 @@ def mostrar_ingresos_por_producto():
         if conexion.is_connected():
             cursor.close()
             conexion.close()
-
 
 def mostrar_productos_mayor_margen_ganancia():
     try:

@@ -71,7 +71,6 @@ def mostrar_asesores():
             cursor.close()
             conexion.close()
 
-
 def persona_existe(dni):
     try:
         conexion = conectar_base_datos()
@@ -189,7 +188,6 @@ def insertar_asesor(dni, telefono, experiencia, especialidad):
                 cursor.close()
                 conexion.close()
     else: print("No se pudieron obtener los datos del asesor desde la API.")
-
 
 def editar_telefono(dni, telefono_nuevo):
     try:

@@ -28,7 +28,6 @@ def menu_gestion_categorias():
             print("Opción no válida. Intente nuevamente.")
             input("Presione Enter para continuar...")
 
-
 def agregar_categoria_menu():
     limpiar_pantalla()
     print("=== Agregar una Categoría ===")
@@ -46,7 +45,6 @@ def agregar_categoria_menu():
             print("La descripción de la categoría no puede estar vacía. Intente nuevamente.")
     agregar_categoria(nombre, descripcion)
     input("Presione Enter para continuar...")
-
 
 def editar_categoria_menu():
     limpiar_pantalla()
