@@ -6,7 +6,7 @@ def menu_seller():
     while True:
         limpiar_pantalla()
         print("     === FabiaNatura ===")
-        print("=== Vendedores ===")
+        print("     === Vendedores ===")
         print("1. Realizar una venta")
         print("2. Salir del sistema")
         opcion = input("Seleccione una opción: ")
