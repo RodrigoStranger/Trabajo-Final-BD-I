@@ -16,7 +16,8 @@ def menu_gestion_ventas():
         if opcion == "1":
             menu_realizar_venta()
         elif opcion == "2":
-            menu_estadistica_ventas()
+            print("funcion en desarrollo.....")
+            input("Presione Enter para continuar...")
         elif opcion == "3":
             print("Saliendo del a la ventana principal...")
             input("Presione Enter para continuar...")
@@ -120,4 +121,4 @@ def menu_realizar_venta():
             print("Opción no válida. Ingrese 's' para sí o 'n' para no.")
 
 def menu_estadistica_ventas():
-    input
+    print("en desarrollo")
