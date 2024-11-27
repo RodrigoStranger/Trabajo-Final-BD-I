@@ -233,3 +233,36 @@ BEGIN
     ORDER BY p.cod_producto;
 END$$
 DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE ReducirStockProducto(
+    IN p_cod_producto INT,
+    IN p_cantidad INT
+)
+BEGIN
+    DECLARE stock_actual INT;
+    IF NOT EXISTS (SELECT 1 FROM Productos WHERE cod_producto = p_cod_producto) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El producto no existe.';
+    END IF;
+    SELECT stock INTO stock_actual
+    FROM Productos
+    WHERE cod_producto = p_cod_producto;
+    IF stock_actual < p_cantidad THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'No hay suficiente stock para la cantidad solicitada.';
+    END IF;
+    UPDATE Productos
+    SET stock = stock - p_cantidad
+    WHERE cod_producto = p_cod_producto;
+    SELECT stock INTO stock_actual
+    FROM Productos
+    WHERE cod_producto = p_cod_producto;
+    IF stock_actual = 0 THEN
+        UPDATE Productos
+        SET estado = 'agotado'
+        WHERE cod_producto = p_cod_producto;
+    END IF;
+END$$
+DELIMITER ;

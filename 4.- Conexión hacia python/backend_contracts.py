@@ -87,8 +87,8 @@ def mostrar_contratos_por_estado_y_tipo():
         cursor.execute(query)
         resultados = cursor.fetchall()
         if resultados:
-            headers = [desc[0] for desc in cursor.description]  # Obtener nombres de columnas
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            headers = [desc[0] for desc in cursor.description]
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No se encontraron resultados en la vista MostrarContratosPorEstadoYTipo.")
     except Exception as e:
@@ -109,8 +109,8 @@ def mostrar_promedio_salarios_por_estado_y_tipo():
         cursor.execute(query)
         resultados = cursor.fetchall()
         if resultados:
-            headers = [desc[0] for desc in cursor.description]  # Obtener nombres de columnas
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            headers = [desc[0] for desc in cursor.description]
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No se encontraron resultados en la vista MostrarPromedioSalariosPorEstadoYTipo.")
     except Exception as e:
@@ -132,7 +132,7 @@ def mostrar_duracion_promedio_contratos_por_empleado():
         resultados = cursor.fetchall()
         if resultados:
             headers = [desc[0] for desc in cursor.description]  # Obtener nombres de columnas
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No se encontraron resultados en la vista MostrarDuracionPromedioContratosPorEmpleado.")
     except Exception as e:

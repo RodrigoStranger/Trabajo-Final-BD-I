@@ -22,6 +22,7 @@ def menu_gestion_categorias():
             menu_categorias_estadisticas()
         elif opcion == "5":
             print("Saliendo del menú de Gestión de Categorías...")
+            input("Presione Enter para continuar...")
             break
         else:
             print("Opción no válida. Intente nuevamente.")
@@ -124,6 +125,7 @@ def menu_categorias_estadisticas():
             mostrar_categorias_con_mas_ventas_por_cliente()
         elif opcion == "6":
             print("Saliendo del menú de estadísticas de categorías.")
+            input("Presione Enter para continuar...")
             break
         else:
             print("Opción no válida. Intente nuevamente.")

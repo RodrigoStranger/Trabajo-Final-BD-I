@@ -13,7 +13,7 @@ def mostrar_proveedores():
         proveedores = cursor.fetchall()
         if proveedores:
             headers = ["RUC", "Nombre"]
-            print(tabulate(proveedores, headers=headers, tablefmt="grid"))
+            print(tabulate(proveedores, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else: print("No hay proveedores disponibles.")
     except Error as e: print(f"Error al consultar los proveedores: {e}")
     finally:
@@ -96,7 +96,7 @@ def mostrar_proveedores_mayor_contribucion():
         if resultados:
             from tabulate import tabulate
             headers = ["RUC", "NombreProveedor", "TotalStockContribuido"]
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No hay datos disponibles.")
     except Exception as e:
@@ -119,7 +119,7 @@ def mostrar_proveedores_mayor_valor():
         if resultados:
             from tabulate import tabulate
             headers = ["RUC", "NombreProveedor", "ValorTotalProductos"]
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No hay datos disponibles.")
     except Exception as e:
@@ -142,7 +142,7 @@ def mostrar_proveedores_productos_mas_vendidos():
         if resultados:
             from tabulate import tabulate
             headers = ["RUC", "NombreProveedor", "ProductoMasVendido", "UnidadesVendidas"]
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No hay datos disponibles.")
     except Exception as e:

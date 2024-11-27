@@ -150,6 +150,7 @@ def menu_estadisticas_contratos():
             mostrar_duracion_promedio_contratos_por_empleado()
         elif opcion == "4":
             print("Regresando al menú principal...")
+            input("Presione Enter para continuar...")
             break
         else:
             print("Opción no válida. Intente nuevamente.")

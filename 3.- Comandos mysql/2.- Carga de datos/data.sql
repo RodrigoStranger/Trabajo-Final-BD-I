@@ -10,7 +10,7 @@ INSERT INTO Personas (dni, nombre, apellido_paterno, apellido_materno, fecha_nac
 INSERT INTO Telefonos_Personas (telefono, dni) VALUES 
 ('982819222', '89281109'), -- Teléfono de Vendedor
 ('982712212', '78291222'), -- Teléfono de Asesor
-('98291822', '71827188');  -- Teléfono de Cliente
+('982918223', '71827188');  -- Teléfono de Cliente
 
 -- Insertar en la tabla Direcciones_Personas
 INSERT INTO Direcciones_Personas (dni, direccion) VALUES 

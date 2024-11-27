@@ -13,7 +13,7 @@ def mostrar_categorias():
         categorias = cursor.fetchall()
         if categorias:
             headers = ["Código", "Nombre"]
-            print(tabulate(categorias, headers=headers, tablefmt="grid"))
+            print(tabulate(categorias, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else: print("No hay categorías disponibles.")
     except Error as e: print(f"Error al consultar las categorías: {e}")
     finally:
@@ -89,7 +89,7 @@ def mostrar_categorias_con_mas_productos():
         cursor.execute(query)
         resultados = cursor.fetchall()
         headers = ["CodigoCategoria", "NombreCategoria", "TotalProductos"]
-        print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
     except Exception as e:
         print(f"Error al consultar las categorías con más productos: {e}")
     finally:
@@ -105,7 +105,7 @@ def mostrar_categorias_con_productos_mas_vendidos():
         cursor.execute(query)
         resultados = cursor.fetchall()
         headers = ["CodigoCategoria", "NombreCategoria", "TotalUnidadesVendidas"]
-        print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
     except Exception as e:
         print(f"Error al consultar las categorías con productos más vendidos: {e}")
     finally:
@@ -121,7 +121,7 @@ def mostrar_categorias_con_productos_agotados():
         cursor.execute(query)
         resultados = cursor.fetchall()
         headers = ["CodigoCategoria", "NombreCategoria", "ProductosAgotados"]
-        print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
     except Exception as e:
         print(f"Error al consultar las categorías con productos agotados: {e}")
     finally:
@@ -137,7 +137,7 @@ def mostrar_categorias_con_productos_disponibles():
         cursor.execute(query)
         resultados = cursor.fetchall()
         headers = ["CodigoCategoria", "NombreCategoria", "ProductosDisponibles"]
-        print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
     except Exception as e:
         print(f"Error al consultar las categorías con productos disponibles: {e}")
     finally:
@@ -153,7 +153,7 @@ def mostrar_categorias_con_mas_ventas_por_cliente():
         cursor.execute(query)
         resultados = cursor.fetchall()
         headers = ["CodigoCategoria", "NombreCategoria", "ClientesUnicos"]
-        print(tabulate(resultados, headers=headers, tablefmt="grid"))
+        print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
     except Exception as e:
         print(f"Error al consultar las categorías con más ventas por cliente: {e}")
     finally:

@@ -15,7 +15,7 @@ def mostrar_empleados():
         if empleados:
             from tabulate import tabulate
             headers = ["DNI", "CodigoEmpleado", "Nombre", "ApellidoPaterno", "ApellidoMaterno", "TieneContrato"]
-            print(tabulate(empleados, headers=headers, tablefmt="grid"))
+            print(tabulate(empleados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No hay empleados disponibles.")
     except Exception as e:
@@ -38,7 +38,7 @@ def mostrar_vendedores():
         if vendedores:
             from tabulate import tabulate
             headers = ["DNI", "CodigoVendedor", "Nombre", "ApellidoPaterno", "ApellidoMaterno", "Rol", "TieneContrato"]
-            print(tabulate(vendedores, headers=headers, tablefmt="grid"))
+            print(tabulate(vendedores, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No hay vendedores disponibles.")
     except Exception as e:
@@ -61,7 +61,7 @@ def mostrar_asesores():
         if asesores:
             from tabulate import tabulate
             headers = ["DNI", "CodigoAsesor", "Nombre", "ApellidoPaterno", "ApellidoMaterno", "Especialidad", "Experiencia", "TieneContrato"]
-            print(tabulate(asesores, headers=headers, tablefmt="grid"))
+            print(tabulate(asesores, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No hay asesores disponibles.")
     except Exception as e:
@@ -309,7 +309,7 @@ def mostrar_top_vendedores():
         if resultados:
             from tabulate import tabulate
             headers = ["Codigo", "Vendedor", "Total Ventas", "Total Ingresos Generados"]
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No hay datos disponibles en la vista de vendedores con más ventas.")
     except Exception as e:
@@ -332,7 +332,7 @@ def mostrar_vendedores_con_menos_ventas():
         if resultados:
             from tabulate import tabulate
             headers = ["Codigo Vendedor", "Nombre Vendedor", "Total Facturas"]
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No hay datos disponibles en la vista de vendedores con menos ventas.")
     except Exception as e:
@@ -355,7 +355,7 @@ def mostrar_productos_mas_vendidos_por_vendedor():
         if resultados:
             from tabulate import tabulate
             headers = ["Codigo Vendedor", "Nombre Vendedor", "Producto Más Vendido", "Unidades Vendidas"]
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No hay datos disponibles en la vista de productos más vendidos por cada vendedor.")
     except Exception as e:
@@ -378,7 +378,7 @@ def mostrar_clientes_atendidos_por_vendedor():
         if resultados:
             from tabulate import tabulate
             headers = ["Codigo Vendedor", "Nombre Vendedor", "Clientes Únicos"]
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No hay datos disponibles en la vista de clientes atendidos por cada vendedor.")
     except Exception as e:
@@ -400,7 +400,7 @@ def mostrar_asesores_con_mas_clientes():
         resultados = cursor.fetchall()
         if resultados:
             headers = ["CodigoAsesor", "NombreAsesor", "ClientesUnicos"]
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No se encontraron datos.")
     except Exception as e:
@@ -422,7 +422,7 @@ def mostrar_ingresos_generados_por_asesores():
         resultados = cursor.fetchall()
         if resultados:
             headers = ["CodigoAsesor", "NombreAsesor", "TotalFacturas", "IngresosTotales"]
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No se encontraron datos.")
     except Exception as e:
@@ -444,7 +444,7 @@ def mostrar_productos_mas_recomendados_por_asesores():
         resultados = cursor.fetchall()
         if resultados:
             headers = ["CodigoAsesor", "NombreAsesor", "Producto", "TotalRecomendaciones"]
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No se encontraron datos.")
     except Exception as e:
@@ -466,11 +466,43 @@ def mostrar_impacto_experiencia_asesores():
         resultados = cursor.fetchall()
         if resultados:
             headers = ["RangoExperiencia", "CantidadAsesores", "PromedioIngresos", "PromedioClientesAtendidos"]
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No se encontraron datos.")
     except Exception as e:
         print(f"Error al consultar el impacto de la experiencia de asesores: {e}")
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def verificar_vendedor(cod_vendedor):
+    try:
+        conexion = conectar_base_datos()
+        if conexion.is_connected():
+            cursor = conexion.cursor()
+            cursor.execute("SELECT VerificarVendedor(%s)", (cod_vendedor,))
+            resultado = cursor.fetchone()
+            return resultado[0] == 1
+    except Error as e:
+        print("Error al conectar a la base de datos:", e)
+        return False
+    finally:
+        if conexion.is_connected():
+            cursor.close()
+            conexion.close()
+
+def verificar_asesor(cod_asesor):
+    try:
+        conexion = conectar_base_datos()
+        if conexion.is_connected():
+            cursor = conexion.cursor()
+            cursor.execute("SELECT VerificarAsesor(%s)", (cod_asesor,))
+            resultado = cursor.fetchone()
+            return resultado[0] == 1
+    except Error as e:
+        print("Error al conectar a la base de datos:", e)
+        return False
     finally:
         if conexion.is_connected():
             cursor.close()

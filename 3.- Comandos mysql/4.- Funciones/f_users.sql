@@ -44,3 +44,39 @@ BEGIN
     RETURN cod_empleado;
 END$$
 DELIMITER ;
+
+DELIMITER $$
+CREATE FUNCTION VerificarVendedor(
+    p_cod_vendedor INT
+)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE vendedor_existente INT;
+    SELECT COUNT(*) INTO vendedor_existente
+    FROM Vendedores
+    WHERE cod_vendedor = p_cod_vendedor;
+    IF vendedor_existente > 0 THEN
+        RETURN 1;
+    ELSE
+        RETURN 0;
+    END IF;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE FUNCTION VerificarAsesor(
+    p_cod_asesor INT
+)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE resultado INT;
+    IF EXISTS (SELECT 1 FROM Asesores WHERE cod_asesor = p_cod_asesor) THEN
+        SET resultado = 1;
+    ELSE
+        SET resultado = 0;
+    END IF;
+    RETURN resultado;
+END$$
+DELIMITER ;

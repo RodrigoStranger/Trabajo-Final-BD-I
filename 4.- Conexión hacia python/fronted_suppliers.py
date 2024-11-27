@@ -23,6 +23,7 @@ def menu_gestion_proveedores():
             menu_estadisticas_proveedores()
         elif opcion == "5":
             print("Saliendo del menú de Gestión de Proveedores...")
+            input("Presione Enter para continuar...")
             break
         else:
             print("Opción no válida. Intente nuevamente.")

@@ -31,6 +31,7 @@ def menu_gestion_productos():
             menu_estadistica_productos()
         elif opcion == "7":
             print("Saliendo del menú de Gestión de Proveedores...")
+            input("Presione Enter para continuar...")
             break
         else:
             print("Opción no válida. Intente nuevamente.")

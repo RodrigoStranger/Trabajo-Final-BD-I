@@ -3,6 +3,7 @@ from fronted_contracts import menu_gestion_contratos
 from fronted_categories import menu_gestion_categorias
 from fronted_suppliers import menu_gestion_proveedores
 from fronted_productos import menu_gestion_productos
+from fronted_sales import menu_gestion_ventas
 import os
 
 def limpiar_pantalla(): os.system('cls' if os.name == 'nt' else 'clear')
@@ -21,8 +22,7 @@ def menu_admin():
         print("7. Salir del sistema")
         opcion = input("Seleccione una opción: ")
         if opcion == "1":
-            print("Función pendiente de desarrollo. Presione Enter para continuar...")
-            input()
+            menu_gestion_ventas()
         elif opcion == "2":
             menu_gestion_personal()
         elif opcion == "3":

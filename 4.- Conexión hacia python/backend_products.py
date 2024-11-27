@@ -14,7 +14,7 @@ def buscar_productos(busqueda):
         if resultados:
             from tabulate import tabulate
             headers = ["Codigo", "Nombre", "Proveedor", "Stock", "PrecioUnitario", "Estado"]
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No se encontraron productos que coincidan con la búsqueda.")
     except Exception as e:
@@ -192,7 +192,7 @@ def mostrar_productos_vendidos():
         resultados = cursor.fetchall()
         if resultados:
             headers = [desc[0] for desc in cursor.description]
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No se encontraron productos vendidos.")
     except Exception as e:
@@ -215,7 +215,7 @@ def mostrar_productos_mas_vendidos():
         resultados = cursor.fetchall()
         if resultados:
             headers = [desc[0] for desc in cursor.description]
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No se encontraron productos más vendidos.")
     except Exception as e:
@@ -238,7 +238,7 @@ def mostrar_productos_menos_vendidos():
         resultados = cursor.fetchall()
         if resultados:
             headers = [desc[0] for desc in cursor.description]
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No se encontraron productos menos vendidos.")
     except Exception as e:
@@ -261,7 +261,7 @@ def mostrar_productos_agotados():
         resultados = cursor.fetchall()
         if resultados:
             headers = [desc[0] for desc in cursor.description]
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No se encontraron productos agotados.")
     except Exception as e:
@@ -284,7 +284,7 @@ def mostrar_ingresos_por_producto():
         resultados = cursor.fetchall()
         if resultados:
             headers = [desc[0] for desc in cursor.description]
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No se encontraron ingresos por productos.")
     except Exception as e:
@@ -307,7 +307,7 @@ def mostrar_productos_mayor_margen_ganancia():
         resultados = cursor.fetchall()
         if resultados:
             headers = [desc[0] for desc in cursor.description]
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No se encontraron productos con mayor margen de ganancia.")
     except Exception as e:
@@ -329,7 +329,7 @@ def mostrar_productos_disponibles():
         resultados = cursor.fetchall()
         if resultados:
             headers = [desc[0] for desc in cursor.description]  # Obtener los nombres de las columnas
-            print(tabulate(resultados, headers=headers, tablefmt="grid"))
+            print(tabulate(resultados, headers=headers, tablefmt="fancy_grid", numalign="center", floatfmt=".2f"))
         else:
             print("No se encontraron productos disponibles.")
     except Exception as e:
@@ -337,4 +337,18 @@ def mostrar_productos_disponibles():
     finally:
         if conexion.is_connected():
             cursor.close()
+            conexion.close()
+
+def reducir_stock_producto(cod_producto, cantidad):
+    try:
+        conexion = conectar_base_datos()
+        if conexion.is_connected():
+            cursor = conexion.cursor()
+            cursor.callproc('ReducirStockProducto', [cod_producto, cantidad])
+            conexion.commit()
+            cursor.close()
+    except Error as e:
+        print(f"Error en la conexión a la base de datos: {e}")
+    finally:
+        if conexion.is_connected():
             conexion.close()
