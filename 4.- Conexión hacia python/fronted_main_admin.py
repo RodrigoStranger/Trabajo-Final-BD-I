@@ -18,8 +18,7 @@ def menu_admin():
         print("4. Gestión de Categorias")
         print("5. Gestión de Proveedores")
         print("6. Gestión de Productos")
-        print("7. Gestión de Reportes")
-        print("8. Salir del sistema")
+        print("7. Salir del sistema")
         opcion = input("Seleccione una opción: ")
         if opcion == "1":
             print("Función pendiente de desarrollo. Presione Enter para continuar...")
@@ -34,10 +33,7 @@ def menu_admin():
             menu_gestion_proveedores()
         elif opcion == "6":
             menu_gestion_productos()
-        if opcion == "7":
-            print("Función pendiente de desarrollo. Presione Enter para continuar...")
-            input()
-        elif opcion == "8":
+        elif opcion == "7":
             print("Saliendo del sistema.....")
             input("Presione Enter para continuar...")
             break
