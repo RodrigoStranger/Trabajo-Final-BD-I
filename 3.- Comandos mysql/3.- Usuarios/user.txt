@@ -1,8 +1,0 @@
--- Crear el usuario 'rodrigo' con la contraseña 'ubnt' para acceso local
-CREATE USER 'rodrigo'@'localhost' IDENTIFIED BY 'ubnt';
-
--- Otorgar todos los privilegios al usuario 'rodrigo' en todas las bases de datos, solo desde localhost
-GRANT ALL PRIVILEGES ON *.* TO 'rodrigo'@'localhost' WITH GRANT OPTION;
-
--- Aplicar los cambios de privilegios
-FLUSH PRIVILEGES;
